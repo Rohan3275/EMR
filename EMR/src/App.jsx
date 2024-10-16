@@ -1,12 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import { useTable } from 'react-table';
 
 function App() {
-
-
-
+  
+  return (
+    <>
+     <div>EMR</div>
+    </>
+  )
 }
+
 export default App
