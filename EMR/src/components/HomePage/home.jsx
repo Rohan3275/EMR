@@ -162,7 +162,7 @@ export function Home() {
 
                     <Accordion open={open === 7}>
                         <AccordionHeader className='text-[16px] font-normal' onClick={() => handleOpen(7)}>
-                            Does healthray's EMR Software provide the facility of capturing radiology images ?
+                            Does healthrays EMR Software provide the facility of capturing radiology images ?
                         </AccordionHeader>
                         <AccordionBody>
                             We&apos;re not always in the position that we want to be at. We&apos;re constantly
