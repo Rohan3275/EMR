@@ -1,5 +1,6 @@
 
 import './App.css'
+import { useTable } from 'react-table';
 
 function App() {
   
