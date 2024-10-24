@@ -12,11 +12,19 @@
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "@material-tailwind/react": "^2.1.10",
+    "@reduxjs/toolkit": "^2.3.0",
+    "@tailwindcss/forms": "^0.5.9",
+    "axios": "^1.7.7",
+    "date-fns": "^4.1.0",
     "react": "^18.3.1",
+<<<<<<< HEAD
     "react-dom": "^18.3.1",
     "react-hook-form": "^7.53.1",
     "react-router-dom": "^6.27.0",
     "react-table": "^7.8.0"
+=======
+    "react-dom": "^18.3.1"
+>>>>>>> 59711bcd2fdcc0e3db43f8e1377c5b385aed2381
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
@@ -31,7 +39,7 @@
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
     "tailwind": "^4.0.0",
-    "tailwindcss": "^3.4.13",
+    "tailwindcss": "^3.4.14",
     "vite": "^5.4.8"
   }
 }
