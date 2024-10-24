@@ -1,8 +1,8 @@
 @tailwind base;
 @tailwind components;
-<<<<<<< HEAD
+/* <<<<<<< HEAD */
 @tailwind utilities;
-=======
+/* ======= */
 @tailwind utilities;
 
 .pt-serif-bold-italic {
@@ -10,4 +10,4 @@
     font-weight: 700;
     font-style: italic;
   }
->>>>>>> d4609d48eeead48f0c4b27383e3698a9bb7d374c
+/* >>>>>>> d4609d48eeead48f0c4b27383e3698a9bb7d374c */

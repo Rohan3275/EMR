@@ -1,21 +1,28 @@
 
 import './App.css'
-<<<<<<< HEAD
+// <<<<<<< HEAD
 import { useTable } from 'react-table';
-=======
+// =======
 import { Footer } from './components/Footer/footer'
 import { Home } from './components/HomePage/home'
 import { MainNavbar } from './components/navbar'
->>>>>>> d4609d48eeead48f0c4b27383e3698a9bb7d374c
+import { BrowserRouter,Routes,Route } from 'react-router-dom';
+import Registration from './components/Patient/PatientRegistration';
+import PatientCard from './components/Patient/PatientCard';
+// >>>>>>> d4609d48eeead48f0c4b27383e3698a9bb7d374c
 
 function App() {
 
   return (
-    <>
+    <BrowserRouter>
       <MainNavbar />
-      <Home />
+      <Routes>
+        <Route path='/' element={<Home />}/>
+        <Route path='/pr' element={<Registration/>}/>
+        <Route path='/patient-card' element={<PatientCard/>}/>
+      </Routes>
       <Footer />
-    </>
+    </BrowserRouter>
   )
 }
 
