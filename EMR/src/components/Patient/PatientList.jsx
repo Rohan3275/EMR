@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 
 export function PatientListd() {
-    const TABLE_HEAD = ["Full Name", "Gender", "Email", "Contact Number", "Appointment Type", "Appointment Date", "Actions",];
+    const TABLE_HEAD = ["Profile", "Full Name", "Gender", "Email", "Contact Number", "Appointment Type", "Appointment Date", "Actions", "Appointment"];
 
     const patient = useSelector(state => state.patient.patient)
     const dispatch = useDispatch()
