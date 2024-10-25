@@ -145,11 +145,8 @@ function NavList() {
         className="font-medium"
       >
         <NavLink to='/pl'>
-<<<<<<< HEAD
+
         <ListItem className="flex items-center gap-2 py-2 pr-4">Patient</ListItem></NavLink>
-=======
-          <ListItem className="flex items-center gap-2 py-2 pr-4">Patient Registration</ListItem></NavLink>
->>>>>>> 05e4072ac2ba74ab1c072240d8ab7c0676e4ef63
       </Typography>
       <NavLink to={'p_list'}>
         <Typography

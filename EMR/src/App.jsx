@@ -8,7 +8,7 @@ import { Home } from './components/HomePage/home'
 import { MainNavbar } from './components/navbar'
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Registration from '../src/components/Patient/PatientRegistration';
-import { PatientList } from './components/Patient/PatientList';
+import { PatientListd } from './components/Patient/PatientList';
 import PatientCard from './components/Patient/PatientCard';
 // >>>>>>> d4609d48eeead48f0c4b27383e3698a9bb7d374c
 
@@ -19,9 +19,9 @@ function App() {
       <MainNavbar />
       <Routes>
         <Route path='/' element={<Home />}/>
-        <Route path='/pl' element={<PatientList/>}/>
+        <Route path='/pl' element={<PatientListd/>}/>
         <Route path='/pr' element={<Registration/>}/>
-        <Route path='/p_list' element={<PatientList/>}/>
+        {/* <Route path='/p_list' element={<PatientList/>}/> */}
         {/* <Route path='/patient-card' element={<PatientCard/>}/> */}
       </Routes>
       <Footer />
