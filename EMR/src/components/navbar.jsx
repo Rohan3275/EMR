@@ -22,6 +22,7 @@ import {
   XMarkIcon,
   ChevronUpIcon,
 } from "@heroicons/react/24/outline";
+import { NavLink } from "react-router-dom";
 
 
 const nestedMenuItems = [
@@ -143,7 +144,8 @@ function NavList() {
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Patient Registration</ListItem>
+        <NavLink to='/pl'>
+        <ListItem className="flex items-center gap-2 py-2 pr-4">Patient Registration</ListItem></NavLink>
       </Typography>
       <Typography
         as="a"
@@ -263,7 +265,7 @@ export function MainNavbar() {
             variant="h6"
             className="mr-4 text-2exportxl cursor-pointer py-1.5 lg:ml-2 pt-serif-bold-italic text-2xl"
           >
-            <img src={img} className="h-14" alt="Loading..." />
+            <NavLink to='/'><img src={img} className="h-14" alt="Loading..." /></NavLink>
           </Typography>
 
           <div className="hidden lg:block">
