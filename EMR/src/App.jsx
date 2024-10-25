@@ -21,6 +21,7 @@ function App() {
         <Route path='/' element={<Home />}/>
         <Route path='/pl' element={<PatientList/>}/>
         <Route path='/pr' element={<Registration/>}/>
+        <Route path='/p_list' element={<PatientList/>}/>
         {/* <Route path='/patient-card' element={<PatientCard/>}/> */}
       </Routes>
       <Footer />
