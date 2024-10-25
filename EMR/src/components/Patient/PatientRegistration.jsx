@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { addPatientAsynk } from './patientListSlice';
 import { Select, Option } from '@material-tailwind/react';
 
@@ -183,7 +183,7 @@ const Registration = () => {
                         <input
                             type="date"
                             // {...register('dob')}
-                            // className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
                             name='date'
                             onChange={e => setValues({ ...values, DOB: e.target.value })}
                         />

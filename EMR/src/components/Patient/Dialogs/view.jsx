@@ -11,7 +11,7 @@ import {
     Typography,
 } from "@material-tailwind/react";
 
-export function ViewDialog({ id, profile, name, doctor, type, reason, time, date, notes, email }) {
+export function ViewDialog({ id, profile, name, DOB, email, contact, gender, age, address, blood_group,  }) {
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => setOpen(!open); console.log(id);
@@ -25,44 +25,50 @@ export function ViewDialog({ id, profile, name, doctor, type, reason, time, date
                 <DialogBody>
                     <Card className="border border-yellow-800 ">
                         <CardBody>
-                            <Typography variant="h5" color="blue-gray" className="mb-2 flex items-center  gap-2 ">
-                                <img src={profile} className="h-12 rounded-full " alt="" />
+                            <Typography variant="h5" color="blue-gray" className="mb-2 flex items-center gap-5 ">
+                                <img src={profile} className="w-14 h-14 rounded-full " alt="" />
                                 <div className="">
-                                    <p className="text-sm">{name}</p>
-                                    <p className="text-xs text-gray-500">{email}</p>
+                                    <div className="flex gap-5">
+                                        <h3 className="text-sm">Name :</h3>
+                                        <p className="text-sm text-gray-600">{name}</p>
+                                    </div>
+                                    <div className="flex gap-5">
+                                        <h3 className="text-sm">Email :</h3>
+                                        <p className="text-sm text-gray-600">{email}</p>
+                                    </div>
                                 </div>
 
                             </Typography>
 
-                            <table className="w-full mt-7   ">
+                            <table className="w-full mt-7">
                                 <tbody className="">
+                                    <tr>
+                                        <td className="text-red-300">Contact No.</td>
+                                        <td>{contact}</td>
+                                    </tr>
                                     <tr className="">
-                                        <td>Consulting Doctor</td>
-                                        <td>{doctor}</td>
+                                        <td className="text-red-300">DOB</td>
+                                        <td>{DOB}</td>
 
                                     </tr>
                                     <tr>
-                                        <td>Appointment Type</td>
-                                        <td>{type}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Reason</td>
-                                        <td>{reason}</td>
+                                        <td className="text-red-300">Gender</td>
+                                        <td>{gender}</td>
                                     </tr>
 
                                     <tr>
-                                        <td>Appointment Date</td>
-                                        <td>{date}</td>
+                                        <td className="text-red-300">Address</td>
+                                        <td>{address}</td>
                                     </tr>
 
                                     <tr>
-                                        <td>Appointment Time </td>
-                                        <td>{time}</td>
+                                        <td className="text-red-300">Age</td>
+                                        <td>{age}</td>
                                     </tr>
 
                                     <tr>
-                                        <td>Doctor Notes</td>
-                                        <td>{notes}</td>
+                                        <td className="text-red-300">Blood Group</td>
+                                        <td>{blood_group}</td>
                                     </tr>
                                 </tbody>
                             </table>
