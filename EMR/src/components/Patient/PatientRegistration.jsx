@@ -84,7 +84,7 @@ const Registration = () => {
 
 
     return (
-        <div className="max-w-5xl mx-auto md:pt-5 p-5">
+        <div className="max-w-5xl mx-auto md:pt-5 p-5 md:border border-gray-600 rounded-lg mt-20 my-5">
             <form onSubmit={onSubmit} >
                 <div className='flex items-center justify-center'>
                     <h1 className="text-3xl font-bold mb-6">Patient Registration</h1>
@@ -92,7 +92,7 @@ const Registration = () => {
 
 
                 {/* Patient Name */}
-                <div className="flex mt-10">
+                <div className="mt-10">
                     <label className="block text-sm font-medium">Patient Name*</label>
                     <input
                         type="text"
@@ -126,7 +126,7 @@ const Registration = () => {
                         <label className="block text-sm font-medium">Marital Status</label>
                         <Select
                             {...register('maritalStatus')}
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                            className="mt-1 block w-full rounded-md p-2"
                             onChange={(value) => setValues({ ...values, status: value })}
 
                         >
@@ -141,7 +141,7 @@ const Registration = () => {
                         <label className="block text-sm font-medium">Nationality</label>
                         <Select
                             {...register('nationality')}
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                            className="mt-1 block w-full rounded-md p-2"
                             onChange={(value) => setValues({ ...values, nationality: value })}
                         >
                             <Option value="">Select</Option>
@@ -155,7 +155,7 @@ const Registration = () => {
                         <label className="block text-sm font-medium">Blood Group</label>
                         <Select
                             {...register('bloodGroup')}
-                            className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                            className="mt-1 block w-full rounded-md p-2"
                             onChange={(value) => setValues({ ...values, blood_group: value })}
                         >
                             <Option value="">Select</Option>
