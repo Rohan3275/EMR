@@ -40,13 +40,14 @@ export function PatientList() {
     return (<>
 
         <div className="mt-32 p-4">
-            <div className="relative mb-5">
+            <div className="relative mb-5 ">
                 <input
                     type="text"
                     placeholder="Search by name or email"
                     value={searchTerm}
+                    
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full p-2 pl-12 border border-blue-400  rounded-full"
+                    className="p-2 pl-12 border border-blue-400  rounded-full"
                 />
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
                     <img src="https://cdn-icons-png.freepik.com/512/861/861627.png" className="h-5 w-5" alt="search icon" />

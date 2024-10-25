@@ -99,7 +99,7 @@ const Registration = () => {
                         // {...register('patientName', { required: true, minLength: 1, maxLength: 255 })}
                         name='name'
                         onChange={e => setValues({ ...values, name: e.target.value })}
-                        className="mt-1 block w-full border border-gray-300 rounded-md p-2"
+                        className="mt-1 block  w-full border border-gray-300 rounded-md p-2"
                     />
                     {/* {errors.patientName && <p className="text-red-600 text-sm">This field is required</p>} */}
                 </div>
