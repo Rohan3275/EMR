@@ -74,7 +74,7 @@ export function Appointment(id) {
     }
 
     return (<>
-        <Button onClick={handleOpen} size="sm" color="orange" variant="outlined">
+        <Button onClick={handleOpen} size="sm" color="orange"  variant="outlined">
             Appointment
         </Button>
         <Dialog open={open} handler={handleOpen} size="xl">

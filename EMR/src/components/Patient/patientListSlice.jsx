@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { deleteList, getList, updateList } from "./patientListApi"
+import { addPatient, deleteList, getList, updateList } from "./patientListApi"
 
 
 
@@ -23,6 +23,11 @@ export const updateAsynk = createAsyncThunk('patient/update', async ({ id, value
     return response.data
 })
 
+export const addPatientAsynk = createAsyncThunk('patient/add', async (data) => {
+    const response = await addPatient(data);
+    return response.data
+})
+
 export const patientSlice = createSlice({
     name: 'patient',
     initialState,
@@ -33,13 +38,11 @@ export const patientSlice = createSlice({
         builder.addCase(getListAsynk.fulfilled, (state, action) => {
             state.status = 'idle';
             state.patient = action.payload
-        }).addCase(updateAsynk.fulfilled, (state, action) => {
-            const index = state.findIndex(patient => patient.id === action.payload.id);
-            if (index !== -1) {
-                state[index] = action.payload;
-            }
-
+        }).addCase(addPatientAsynk.fulfilled, (state, action) => {
+            state.status = 'idle';
+            state.patient.push(action.payload)
         })
+
             .addCase(deleteAsynk.fulfilled, (state, action) => {
                 state.status = "idle";
                 state.patient = state.patient.filter(patient => patient.id !== action.payload)
