@@ -10,8 +10,8 @@ function App() {
   return (
     <>
       <MainNavbar />
-      {/* <Home /> */}
-      <PatientList/>
+      <Home />
+      {/* <PatientList/> */}
       <Footer />
     </>
   )

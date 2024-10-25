@@ -255,7 +255,7 @@ export function MainNavbar() {
 
   return (
     <div className="">
-      <Navbar className=" max-w-full  mx-auto  rounded-none shadow-none fixed z-20 top-0  ">
+      <Navbar className=" max-w-full  mx-auto  rounded-none shadow-none fixed z-20 top-0  p-0  " >
         <div className="flex items-center justify-between text-blue-gray-900 ">
           <Typography
             as="a"
