@@ -91,7 +91,7 @@ export function PatientList() {
                                                 className={`  cursor-pointer  ${zoomedIndex === index ? 'z-10' : ''}`}
                                                 onClick={() => handleClick(index)}>
 
-                                                <img src={item.profile} className={`max-h-10 rounded-full transition-transform duration-300 ${zoomedIndex === index ? 'scale-[4] ms-20' : 'scale-100'}`} alt="" />
+                                                <img src={item.profile} className={`max-h-10 max-w-20 rounded-full transition-transform overflow-hidden duration-300 ${zoomedIndex === index ? 'scale-[4] ms-20' : 'scale-100'}`} alt="" />
                                             </div>
 
 
