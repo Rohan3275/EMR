@@ -9,8 +9,7 @@ import { MainNavbar } from './components/navbar'
 import { BrowserRouter,Routes,Route } from 'react-router-dom';
 import Registration from '../src/components/Patient/PatientRegistration';
 // import PatientCard from '../../../React-new/PatientForm/Patient/PatientCard';
-import { PatientList } from './components/Appointments/PatientList/patientLists';
-import { PatientListd } from './components/Patient/PatientList';
+import { PatientList } from './components/Patient/PatientList';
 // >>>>>>> d4609d48eeead48f0c4b27383e3698a9bb7d374c
 
 function App() {
@@ -22,7 +21,7 @@ function App() {
         <Route path='/' element={<Home />}/>
         <Route path='/pl' element={<PatientListd/>}/>
         <Route path='/pr' element={<Registration/>}/>
-        <Route path='/p_list' element={<PatientList/>}/>
+        {/* <Route path='/p_list' element={<PatientList/>}/> */}
         {/* <Route path='/patient-card' element={<PatientCard/>}/> */}
       </Routes>
       <Footer />
