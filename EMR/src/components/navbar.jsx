@@ -144,7 +144,7 @@ function NavList() {
         color="blue-gray"
         className="font-medium"
       >
-        <NavLink to='/pr'>
+        <NavLink to='/pl'>
         <ListItem className="flex items-center gap-2 py-2 pr-4">Patient Registration</ListItem></NavLink>
       </Typography>
       <Typography

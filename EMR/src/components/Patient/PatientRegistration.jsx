@@ -424,7 +424,6 @@ const Registration = () => {
                         Submit
                     </button>
                 </div>
-
             </form>
         </div>
     );
