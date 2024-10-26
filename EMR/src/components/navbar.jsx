@@ -22,6 +22,7 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { NavLink } from "react-router-dom";
 
 const nestedMenuItems = [
   { title: "Hero" },
@@ -127,11 +128,108 @@ function NavList() {
 
   return (
     <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
+<<<<<<< HEAD
       {["Patient Registration", "Appointments", "Diagnosis", "Blood Bank", "Insurance", "Billing", "Doctors", "Reports"].map((item, index) => (
         <Typography key={index} as="a" href="#" variant="small" color="blue-gray" className="font-medium">
           <ListItem className="flex items-center gap-2 py-2 pr-4">{item}</ListItem>
         </Typography>
       ))}
+=======
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <NavLink to='/pl'>
+
+        <ListItem className="flex items-center gap-2 py-2 pr-4">Patient</ListItem></NavLink>
+      </Typography>
+      <NavLink to={'p_list'}>
+        <Typography
+          as="a"
+          href="#"
+          variant="small"
+          color="blue-gray"
+          className="font-medium"
+        >
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            Appointments
+          </ListItem>
+        </Typography>
+      </NavLink>
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          Diagnosis
+        </ListItem>
+      </Typography>
+
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          Blood Bank
+        </ListItem>
+      </Typography>
+
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          Insurance
+        </ListItem>
+      </Typography>
+
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          Billing
+        </ListItem>
+      </Typography>
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          Doctors
+        </ListItem>
+      </Typography>
+
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          Reports
+        </ListItem>
+      </Typography>
+>>>>>>> df7c12eba52bdf774db193b1e20e5549e7bcd394
       <NavListMenu />
       {/* Conditional rendering for login/profile button */}
       {!user ? (
@@ -171,12 +269,49 @@ export function MainNavbar() {
   }, []);
 
   return (
+<<<<<<< HEAD
     <Navbar className="max-w-full mx-auto rounded-none shadow-none fixed z-20 top-0">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography as="a" href="/home" variant="h6" className="mr-4 text-2xl cursor-pointer py-1.5 lg:ml-2">
           <img src={img} className="h-14" alt="Loading..." />
         </Typography>
         <div className="hidden lg:block">
+=======
+    <div className="">
+      <Navbar className=" max-w-full  mx-auto  rounded-none shadow-none fixed z-20 top-0  p-0  " >
+        <div className="flex items-center justify-between text-blue-gray-900 ">
+          <Typography
+            as="a"
+            href="#"
+            variant="h6"
+            className="mr-4 text-2exportxl cursor-pointer py-1.5 lg:ml-2 pt-serif-bold-italic text-2xl"
+          >
+            <NavLink to='/'><img src={img} className="h-14" alt="Loading..." /></NavLink>
+          </Typography>
+
+          <div className="hidden lg:block">
+            <NavList />
+          </div>
+          {/* <div className="hidden gap-2 lg:flex">
+          <Button size="sm">Get Started</Button>
+          <Button variant="outlined" size="sm">
+            Log In
+          </Button>
+        </div> */}
+          <IconButton
+            variant="text"
+            className="lg:hidden"
+            onClick={() => setOpenNav(!openNav)}
+          >
+            {openNav ? (
+              <XMarkIcon className="h-6 w-6" strokeWidth={2} />
+            ) : (
+              <Bars3Icon className="h-6 w-6" strokeWidth={2} />
+            )}
+          </IconButton>
+        </div>
+        <Collapse open={openNav}>
+>>>>>>> df7c12eba52bdf774db193b1e20e5549e7bcd394
           <NavList />
         </div>
         <IconButton variant="text" className="lg:hidden" onClick={() => setOpenNav(!openNav)}>
