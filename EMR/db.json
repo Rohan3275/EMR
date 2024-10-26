@@ -1,0 +1,77 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "email": "john@example.com",
+      "password": "password123"
+    },
+    {
+      "id": "2",
+      "email": "jane@example.com",
+      "password": "mypassword"
+    },
+    {
+      "id": "3",
+      "email": "alice@example.com",
+      "password": "alicepassword"
+    },
+    {
+      "id": "856c",
+      "email": "nitin@gmail.com",
+      "password": "789654"
+    },
+    {
+      "id": "4d62",
+      "email": "nitin@gmail.com",
+      "password": "789654"
+    },
+    {
+      "id": "8a56",
+      "email": "raj@yahoo.com",
+      "password": "raj123"
+    },
+    {
+      "id": "08dd",
+      "email": "zeeshan@yahoo.com",
+      "password": "zee123"
+    },
+    {
+      "id": "bdf6",
+      "email": "shubham2@gmail.com",
+      "password": "shub123",
+      "firstName": "Shubham"
+    },
+    {
+      "id": "b8fb",
+      "email": "nitinhandalofficial@gmail.com",
+      "password": "789654",
+      "firstName": "Nitin"
+    },
+    {
+      "id": "ede6",
+      "email": "Kunal001@gmail.com",
+      "password": "kunal123",
+      "firstName": "Kunal"
+    },
+    {
+      "id": "892f",
+      "email": {}
+    },
+    {
+      "id": "6488",
+      "email": "nitinhofficial@gmail.com",
+      "password": "789654",
+      "firstName": "Nitin"
+    },
+    {
+      "id": "266b",
+      "email": {}
+    },
+    {
+      "id": "3013",
+      "email": "nitinofficial@gmail.com",
+      "password": "789654",
+      "firstName": "Nitin"
+    }
+  ]
+}

@@ -2,7 +2,7 @@ import img from '../../assets/images/logo-2.png'
 export function Footer() {
     return (<>
 
-        <div className="bg-black">
+        <div className="bg-black ">
             <div className="flex md:flex-row flex-col justify-between ps-7 pt-7 pe-7 gap-10">
                 <div className="flex items-center text-white gap-2">
                     <div>
