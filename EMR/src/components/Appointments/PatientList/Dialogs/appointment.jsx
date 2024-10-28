@@ -54,7 +54,8 @@ export function Appointment(id) {
         time: '',
         date: '',
         doctor: '',
-        notes: ''
+        notes: '',
+        appoitment:'Yes'
     })
 
     const handleOpen = () => setOpen(!open);

@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 
 export function PatientListd() {
-    const TABLE_HEAD = [ "Full Name", "Gender", "Email", "Contact Number", "Appointment Type", "Appointment Date", "Actions", "Appointment"];
+    const TABLE_HEAD = ["Full Name", "Gender", "Email", "Contact Number", "Appointment Type", "Appointment Date", "Actions", "Appointment Status"];
 
     const patient = useSelector(state => state.patient.patient)
     const dispatch = useDispatch()
@@ -56,7 +56,7 @@ export function PatientListd() {
                 </span>
 
                 <NavLink to='/pr'>
-                    <Button>Add Patient</Button>
+                    <Button className="" size="sm" color="red">Add Patient</Button>
                 </NavLink>
 
             </div>
@@ -170,25 +170,23 @@ export function PatientListd() {
                                             className="font-medium"
                                         >
                                             <div className="flex gap-2">
-                                                <ViewDialog id={item.id} profile={item.profile} DOB={item.DOB} age={item.age} gender={item.gender} contact={item.contact} name={item.name} address={item.address} blood_group={item.blood_group} email={item.email} />
+                                                <ViewDialog id={item.id} profile={item.profile} DOB={item.DOB} age={item.age} gender={item.gender} contact={item.contact} name={item.name} address={item.address} blood_group={item.blood_group} email={item.email} appoitment={item.appoitment} />
                                                 <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" className="h-4" onClick={() => dispatch(deleteAsynk(item.id))} alt="" /><img src="" alt="" className="h-5" />
                                             </div>
                                         </Typography>
                                     </td>
 
-                                    {/* <td className={classes}>
+                                    <td className={classes}>
                                         <Typography
                                             as="a"
                                             href="#"
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-medium"
+                                            className="text-green-800 font-bold"
                                         >
-                                            <div className="flex gap-2">
-                                                <Appointment id={item.id} />
-                                            </div>
+                                            {item.appoitment}
                                         </Typography>
-                                    </td> */}
+                                    </td>
                                 </tr>
                             );
                         })}

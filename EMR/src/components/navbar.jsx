@@ -34,7 +34,7 @@ const nestedMenuItems = [
 
 
 const menuItem = [
-  { title: 'Patient' ,navLink:'pl' }, { title: 'Appointment',navLink:'p_list' }, { title: 'Diagnosis' }, { title: 'Blood Bank' }, { title: 'Insurance' }, { title: 'Billing' }, { title: 'Doctors' }, { title: 'Reports' }
+  { title: 'Patient', navLink: 'pl' }, { title: 'Appointment', navLink: 'p_list' }, { title: 'Diagnosis' }, { title: 'Blood Bank' }, { title: 'Insurance' }, { title: 'Billing' }, { title: 'Doctors' }, { title: 'Reports' }
 ]
 
 function NavListMenu() {
@@ -136,9 +136,9 @@ function NavList() {
     <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
       {menuItem.map((item, index) => (
         <NavLink to={item.navLink}>
-        <Typography key={index} as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-          <ListItem className="flex items-center gap-2 py-2 pr-4">{item.title}</ListItem>
-        </Typography>
+          <Typography key={index} as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+            <ListItem className="flex items-center gap-2 py-2 pr-4">{item.title}</ListItem>
+          </Typography>
         </NavLink>
       ))}
       <NavListMenu />
@@ -180,7 +180,7 @@ export function MainNavbar() {
   }, []);
 
   return (
-    <Navbar className="max-w-full mx-auto rounded-none shadow-none fixed z-20 top-0">
+    <Navbar className="max-w-full mx-auto rounded-none shadow-none fixed z-20 top-0 p-0">
       <div className="flex items-center justify-between text-blue-gray-900">
         <Typography as="a" href="/home" variant="h6" className="mr-4 text-2xl cursor-pointer py-1.5 lg:ml-2">
           <img src={img} className="h-14" alt="Loading..." />

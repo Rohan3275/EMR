@@ -27,11 +27,11 @@ import { PatientList } from './components/Appointments/PatientList/patientLists'
 
 function App() {
   return (
-
     <AuthProvider>
       <Router>
         <MainNavbar />
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />

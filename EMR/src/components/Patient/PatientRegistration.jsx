@@ -41,6 +41,7 @@ const Registration = () => {
         p_limit: '',
         profile: '',
         reason: '',
+        appoitment:'No',
         type: '',
         time: '',
         date: '',
@@ -87,7 +88,7 @@ const Registration = () => {
         <div className="w-[80%]  mx-auto md:pt-5 p-5 md:border border-gray-200 rounded-lg mt-[110px] overflow-auto max-h-[700px] my-5">
             <form onSubmit={onSubmit} >
                 <div className='flex items-center justify-center'>
-                    <h1 className="text-3xl font-bold mb-6">Patient Registration</h1>
+                    <h1 className="text-3xl font-bold mb-6">Patient Registration</h1>   
                 </div>
 
 
