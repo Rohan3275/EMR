@@ -19,7 +19,7 @@ const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.get(`http://localhost:5000/users?email=${email}&password=${password}`);
+      const res = await axios.get(`http://localhost:3000/users?email=${email}&password=${password}`);
       if (res.data.length > 0) {
         const loggedInUser = res.data[0];
         setUser(loggedInUser);
@@ -36,13 +36,13 @@ const AuthProvider = ({ children }) => {
   const signUp = async (email, password, firstName, profileImage) => {
     try {
       // Check if email already exists
-      const existingUserRes = await axios.get(`http://localhost:5000/users?email=${email}`);
+      const existingUserRes = await axios.get(`http://localhost:3000/users?email=${email}`);
       if (existingUserRes.data.length > 0) {
         throw new Error("Email already in use");
       }
 
       // Create new user
-      const res = await axios.post("http://localhost:5000/users", { 
+      const res = await axios.post("http://localhost:3000/users", { 
         email, 
         password, 
         firstName, 

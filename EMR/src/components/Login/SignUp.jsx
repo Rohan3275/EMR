@@ -187,8 +187,8 @@ const SignUp = () => {
             </select>
           </div>
 
-         {/* Mobile Number */}
-         <div>
+          {/* Mobile Number */}
+          <div>
             <label className="block text-sm font-medium text-gray-700">Mobile Number</label>
             <div className="flex">
               {/* Country Code Dropdown */}
