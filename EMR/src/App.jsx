@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 
+>>>>>>> d11d3def897701addbd06af5396a0b163847c9c0
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./components/Login/Login";
 import SignUp from "./components/Login/SignUp";
@@ -19,10 +22,20 @@ import './App.css'
 import Registration from '../src/components/Patient/PatientRegistration';
 
 import { PatientListd } from './components/Patient/PatientList';
+<<<<<<< HEAD
+// import PatientCard from './components/Patient/PatientCard';
+
+// import PatientCard from '../../../React-new/PatientForm/Patient/PatientCard';
+// import {  PatientListd } from './components/Patient/PatientList';
+
+import { PatientList } from './components/Appointments/PatientList/patientLists';
+// >>>>>>> d4609d48eeead48f0c4b27383e3698a9bb7d374c
+=======
 
 
 import { PatientList } from './components/Appointments/PatientList/patientLists';
 
+>>>>>>> d11d3def897701addbd06af5396a0b163847c9c0
 
 
 function App() {
@@ -37,7 +50,11 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
           <Route path='/pl' element={<PatientListd />} />
           <Route path='/pr' element={<Registration />} />
+<<<<<<< HEAD
+          <Route path='/p_list' element={<PatientList/>}/>
+=======
           <Route path='/p_list' element={<PatientList />} />
+>>>>>>> d11d3def897701addbd06af5396a0b163847c9c0
           <Route
             path="/home"
             element={
