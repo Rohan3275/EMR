@@ -31,6 +31,12 @@ const nestedMenuItems = [
   { title: "Ecommerce" },
 ];
 
+
+
+const menuItem = [
+  { title: 'Patient' ,navLink:'pl' }, { title: 'Appointment',navLink:'p_list' }, { title: 'Diagnosis' }, { title: 'Blood Bank' }, { title: 'Insurance' }, { title: 'Billing' }, { title: 'Doctors' }, { title: 'Reports' }
+]
+
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [openNestedMenu, setOpenNestedMenu] = React.useState(false);
@@ -128,10 +134,16 @@ function NavList() {
 
   return (
     <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
+<<<<<<< HEAD
       {["Patient Registration", "Appointments", "Diagnosis", "Blood Bank", "Insurance", "Billing", "Doctors", "Reports"].map((item, index) => (
+=======
+      {menuItem.map((item, index) => (
+        <NavLink to={item.navLink}>
+>>>>>>> d11d3def897701addbd06af5396a0b163847c9c0
         <Typography key={index} as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-          <ListItem className="flex items-center gap-2 py-2 pr-4">{item}</ListItem>
+          <ListItem className="flex items-center gap-2 py-2 pr-4">{item.title}</ListItem>
         </Typography>
+        </NavLink>
       ))}
       <NavListMenu />
       {/* Conditional rendering for login/profile button */}
