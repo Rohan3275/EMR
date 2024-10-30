@@ -22,6 +22,7 @@ import {
   XMarkIcon,
   ChevronUpIcon,
 } from "@heroicons/react/24/outline";
+import { NavLink } from "react-router-dom";
 
 
 const nestedMenuItems = [
@@ -143,20 +144,23 @@ function NavList() {
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Patient Registration</ListItem>
-      </Typography>
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Appointments
-        </ListItem>
-      </Typography>
+        <NavLink to='/pl'>
 
+        <ListItem className="flex items-center gap-2 py-2 pr-4">Patient</ListItem></NavLink>
+      </Typography>
+      <NavLink to={'p_list'}>
+        <Typography
+          as="a"
+          href="#"
+          variant="small"
+          color="blue-gray"
+          className="font-medium"
+        >
+          <ListItem className="flex items-center gap-2 py-2 pr-4">
+            Appointments
+          </ListItem>
+        </Typography>
+      </NavLink>
       <Typography
         as="a"
         href="#"
@@ -255,7 +259,7 @@ export function MainNavbar() {
 
   return (
     <div className="">
-      <Navbar className=" max-w-full  mx-auto  rounded-none shadow-none fixed z-20 top-0  ">
+      <Navbar className=" max-w-full  mx-auto  rounded-none shadow-none fixed z-20 top-0  p-0  " >
         <div className="flex items-center justify-between text-blue-gray-900 ">
           <Typography
             as="a"
@@ -263,7 +267,7 @@ export function MainNavbar() {
             variant="h6"
             className="mr-4 text-2exportxl cursor-pointer py-1.5 lg:ml-2 pt-serif-bold-italic text-2xl"
           >
-            <img src={img} className="h-14" alt="Loading..." />
+            <NavLink to='/'><img src={img} className="h-14" alt="Loading..." /></NavLink>
           </Typography>
 
           <div className="hidden lg:block">
