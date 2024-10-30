@@ -1,9 +1,9 @@
 
 import './App.css'
 //import { useTable } from 'react-table';
-import { PatientList } from './components/Appointments/PatientList/patientLists'
+//import { PatientList } from './components/Appointments/PatientList/patientLists'
 import { Footer } from './components/Footer/footer'
-//import { Home } from './components/HomePage/home'
+import { Home } from './components/HomePage/home'
 import { MainNavbar } from './components/navbar'
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
   return (
     <>
       <MainNavbar />
-      {/* <Home /> */}
-      <PatientList/>
+      <Home />
+      {/* <PatientList/> */}
       <Footer />
     </>
   )
