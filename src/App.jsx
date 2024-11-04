@@ -18,6 +18,7 @@ function App() {
     <BrowserRouter>
       <MainNavbar />
       <Routes>
+        
         <Route path='/' element={<Home />}/>
         <Route path='/pl' element={<PatientListd/>}/>
         <Route path='/pr' element={<Registration/>}/>
@@ -29,4 +30,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
