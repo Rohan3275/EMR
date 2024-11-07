@@ -22,10 +22,21 @@ import 'react-time-picker/dist/TimePicker.css';
 import { useDispatch, useSelector } from "react-redux";
 import { getListAsynk, updateAsynk } from "../patientListSlice";
 import axios from "axios";
+import { getdoctorsListAsynk } from "../../../Doctor/doctorsSlice";
+import { Alert_Box } from "../../../../AlertBox/alert";
 
 export function Appointment(id) {
 
     const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch();
+
+    // getDoctors
+    const doctors = useSelector(state => state.doctors.doctors)
+    useEffect(() => {
+        dispatch(getdoctorsListAsynk())
+    }, [dispatch])
+
+    // 
 
     // date time
     const [selectedDate, setSelectedDate] = useState(null);
@@ -55,7 +66,7 @@ export function Appointment(id) {
         date: '',
         doctor: '',
         notes: '',
-        appoitment:'Yes'
+        appoitment: 'Yes'
     })
 
     const handleOpen = () => setOpen(!open);
@@ -69,13 +80,13 @@ export function Appointment(id) {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.patch("http://localhost:3000/appointment/" + id.id, values)
-            .then(res => { alert("Appointment Shedule Successefully...."); location.reload() })
+            .then(res => { <Alert_Box/>; location.reload() })
             .catch(err => console.log(err))
 
     }
 
     return (<>
-        <Button onClick={handleOpen} size="sm" color="orange"  variant="outlined">
+        <Button onClick={handleOpen} size="sm" color="orange" variant="outlined">
             Appointment
         </Button>
         <Dialog open={open} handler={handleOpen} size="xl">
@@ -169,11 +180,12 @@ export function Appointment(id) {
                             value={values.doctor} // Set the current value
                             onChange={(value) => setValues({ ...values, doctor: value })} // Use the value directly
                         >
-                            <Option value="Dr. Smith">Dr. Smith</Option>
-                            <Option value="Dr. Johnson">Dr. Johnson</Option>
-                            <Option value="Dr. Lee">Dr. Lee</Option>
-                            <Option value="Dr. Brown">Dr. Brown</Option>
-                            <Option value="Dr. Wilson">Dr. Wilson</Option>
+                            {
+                                doctors.map((doct) => (
+                                    <Option value={doct.fname + " " + doct.mname + " " + doct.lname}><span>Dr.</span> {doct.fname + " " + doct.mname + " " + doct.lname}</Option>
+                                ))
+                            }
+
                         </Select>
                     </div>
 

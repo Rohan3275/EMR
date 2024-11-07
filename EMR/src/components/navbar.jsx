@@ -34,7 +34,7 @@ const nestedMenuItems = [
 
 
 const menuItem = [
-  { title: 'Patient', navLink: 'pl' }, { title: 'Appointment', navLink: 'p_list' }, { title: 'Diagnosis' }, { title: 'Blood Bank' }, { title: 'Insurance' }, { title: 'Billing' }, { title: 'Doctors' }, { title: 'Reports' }
+  { title: 'Patient', navLink: 'pl' }, { title: 'Appointment', navLink: 'p_list' }, { title: 'Diagnosis' }, { title: 'Blood Bank' }, { title: 'Insurance' }, { title: 'Billing' }, { title: 'Doctors', navLink: '/doctor' }, { title: 'Reports' }
 ]
 
 function NavListMenu() {
@@ -134,22 +134,25 @@ function NavList() {
 
   return (
     <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
-<<<<<<< HEAD
-      {["Patient Registration", "Appointments", "Diagnosis", "Blood Bank", "Insurance", "Billing", "Doctors", "Reports"].map((item, index) => (
-=======
       {menuItem.map((item, index) => (
         <NavLink to={item.navLink}>
-        <Typography key={index} as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-          <ListItem className="flex items-center gap-2 py-2 pr-4">{item.title}</ListItem>
-        </Typography>
+          <Typography key={index} as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+            <ListItem className="flex items-center gap-2 py-2 pr-4">{item.title}</ListItem>
+          </Typography>
         </NavLink>
       ))}
       <NavListMenu />
       {/* Conditional rendering for login/profile button */}
       {!user ? (
-        <Button className="bg-grey text-grey-600">
-          <Link to="/login">Login</Link>
-        </Button>
+
+        <Link to="/login">
+          <Button size="sm" variant="outlined" color="blue">Login</Button>
+
+        </Link>
+        // <Link to="/login">
+        //   <Button className="bg-grey text-grey-600">
+        //     Login
+        //   </Button></Link>
       ) : (
         <Menu placement="bottom-end" allowHover>
           <MenuHandler>

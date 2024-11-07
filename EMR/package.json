@@ -13,7 +13,6 @@
   "dependencies": {
     "@heroicons/react": "^2.1.5",
     "@material-tailwind/react": "^2.1.10",
-<<<<<<< HEAD
     "@reduxjs/toolkit": "^2.3.0",
     "axios": "^1.7.7",
     "date-fns": "^4.1.0",
@@ -25,14 +24,6 @@
     "react-router-dom": "^6.27.0",
     "react-table": "^7.8.0",
     "react-time-picker": "^7.0.0"
-=======
-    "axios": "^1.7.7",
-    "react": "^18.3.1",
-    "react-datepicker": "^7.5.0",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^6.27.0",
-    "react-table": "^7.8.0"
->>>>>>> d11d3def897701addbd06af5396a0b163847c9c0
   },
   "devDependencies": {
     "@eslint/js": "^9.11.1",
