@@ -45,7 +45,9 @@ const Registration = () => {
         time: '',
         date: '',
         doctor: '',
-        notes: ''
+        notes: '',
+        appoitment:'No'
+
     })
 
 
@@ -55,6 +57,7 @@ const Registration = () => {
 
         dispatch(addPatientAsynk(values))
         notify("Patient added successfully ","success")
+        navigate('/pl')
         // data.imagePreview = imagePreview; // Attach the image preview to the data
         // navigate('/patient-card', { state: data }); // Navigate to the review page with the form data
 

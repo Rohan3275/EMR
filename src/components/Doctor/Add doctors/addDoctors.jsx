@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addDoctorAsynk } from "../doctorsSlice";
 import { useNavigate } from "react-router-dom";
+import { notify } from "../../ToastMessage/message";
+import { ToastContainer } from "react-toastify";
 
 export function AddDoctors() {
 
@@ -54,8 +56,9 @@ export function AddDoctors() {
         e.preventDefault();
         console.log(values)
         dispatch(addDoctorAsynk(values))
-        alert("Doctor added successfully..")
+        notify("Doctor added successfully ","success")
         navigate('/doctor')
+       
     }
     // 
     return (<>
@@ -215,6 +218,7 @@ export function AddDoctors() {
                     </div>
                 </form>
             </div>
+           
         </div>
     </>)
 }

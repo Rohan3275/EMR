@@ -5,7 +5,7 @@ import { deleteDoctorsAsynk, getdoctorsListAsynk } from "./doctorsSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Card, Typography } from "@material-tailwind/react";
 import { notify } from "../ToastMessage/message";
-import { ToastContainer, toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 
 
@@ -36,7 +36,7 @@ export function DoctorList() {
     return (<>
         <div className="mt-32 p-4 ">
             {/* <Button onClick={() => { notify("") }}>Toast Message</Button> */}
-            <ToastContainer />
+           
             <div className="relative mb-5 flex justify-between  me-5">
                 <input
                     type="text"
