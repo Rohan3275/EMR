@@ -38,6 +38,7 @@ export function Appointment(id) {
         setSelectedTime(time);
         setValues({ ...values, time: format(time, 'HH:mm') });
         setIsTimeOpen(false);
+        
     };
 
     const handleDateChange = (date) => {

@@ -27,6 +27,7 @@ export function DoctorList() {
             item.fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
             item.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
             item.specialist.toLowerCase().includes(searchTerm.toLowerCase())
+            
         );
         setFilteredPatients(results);
     }, [searchTerm, doctors])
@@ -34,7 +35,7 @@ export function DoctorList() {
     // 
     return (<>
         <div className="mt-32 p-4 ">
-            <Button onClick={() => { notify("") }}>Toast Message</Button>
+            {/* <Button onClick={() => { notify("") }}>Toast Message</Button> */}
             <ToastContainer />
             <div className="relative mb-5 flex justify-between  me-5">
                 <input

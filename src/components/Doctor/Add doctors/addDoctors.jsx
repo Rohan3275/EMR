@@ -45,6 +45,7 @@ export function AddDoctors() {
 
     const removeImage = () => {
         setImagePreview(null);
+        
     };
 
     // form Submit

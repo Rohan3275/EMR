@@ -45,7 +45,7 @@ function NavList() {
   // Handle logout
   const handleLogout = () => {
     logout();
-    notify("You have been logged out successfully!","success");  // Call notify when logout happens
+    notify("You have been logged out successfully!", "success");  // Call notify when logout happens
     navigate("/home");
     location.reload() // optional
   };
@@ -54,7 +54,7 @@ function NavList() {
   const handleNavLinkClick = (e, navLink) => {
     if (!localStorageData && navLink) {
       e.preventDefault();
-      notify("Please login to access this page.","error")
+      notify("Please login to access this page.", "error")
     }
   };
 
@@ -93,7 +93,7 @@ function NavList() {
           </MenuHandler>
           <MenuList className="rounded-xl">
             <MenuItem>
-              <button onClick={handleLogout}>Logout</button> 
+              <button onClick={handleLogout}>Logout</button>
             </MenuItem>
           </MenuList>
         </Menu>
