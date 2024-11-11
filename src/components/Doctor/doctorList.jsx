@@ -4,13 +4,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { deleteDoctorsAsynk, getdoctorsListAsynk } from "./doctorsSlice";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Button, Card, Typography } from "@material-tailwind/react";
+import { notify } from "../ToastMessage/message";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export function DoctorList() {
     const TABLE_HEAD = ["Profile", "Full Name", "Specialist", "Email", "Contact Number", "Gender", "Actions"];
     const doctors = useSelector(state => state.doctors.doctors)
     const dispatch = useDispatch();
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getdoctorsListAsynk())
@@ -27,11 +30,12 @@ export function DoctorList() {
         );
         setFilteredPatients(results);
     }, [searchTerm, doctors])
-
+   
     // 
     return (<>
         <div className="mt-32 p-4 ">
-
+            <Button onClick={() => { notify("") }}>Toast Message</Button>
+            <ToastContainer />
             <div className="relative mb-5 flex justify-between  me-5">
                 <input
                     type="text"

@@ -6,6 +6,7 @@ import {
 import React from "react";
 import { Card } from './Cards/card'
 import { Form } from './Form/form'
+import { ToastContainer } from 'react-toastify';
 export function Home() {
     const [open, setOpen] = React.useState(1);
     const handleOpen = (value) => setOpen(open === value ? 0 : value);
@@ -193,6 +194,7 @@ export function Home() {
                     </Accordion>
                 </div>
             </div>
+            <ToastContainer />
         </div>
 
     </>)

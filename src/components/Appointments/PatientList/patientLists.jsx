@@ -1,4 +1,4 @@
-import {  Card, Typography } from "@material-tailwind/react";
+import { Button, Card, Typography } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteAsynk, getListAsynk } from "./patientListSlice";
