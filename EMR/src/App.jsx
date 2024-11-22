@@ -1,11 +1,15 @@
-
+import LoginPage from './components/LoginPage'
+import Header from './components/Header'
+import Dashboard from './components/Dashboard'
 import './App.css'
 
 function App() {
   
   return (
     <>
-     <div>EMR</div>
+     {/*<LoginPage/>*/}
+     <Header/>
+     <Dashboard/>
     </>
   )
 }
