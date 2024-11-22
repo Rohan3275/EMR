@@ -1,7 +1,6 @@
-import React from "react";
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { AuthContext } from "../AuthContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, NavLink } from "react-router-dom";
 import {
   Navbar,
   Collapse,
@@ -22,7 +21,6 @@ import {
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { NavLink } from "react-router-dom";
 
 const nestedMenuItems = [
   { title: "Hero" },
@@ -31,11 +29,16 @@ const nestedMenuItems = [
   { title: "Ecommerce" },
 ];
 
-
-
 const menuItem = [
-  { title: 'Patient', navLink: 'pl' }, { title: 'Appointment', navLink: 'p_list' }, { title: 'Diagnosis' }, { title: 'Blood Bank' }, { title: 'Insurance' }, { title: 'Billing' }, { title: 'Doctors' }, { title: 'Reports' }
-]
+  { title: 'Patient', navLink: 'pl' },
+  { title: 'Appointment', navLink: 'p_list' },
+  { title: 'Diagnosis' },
+  { title: 'Blood Bank' },
+  { title: 'Insurance' },
+  { title: 'Billing' },
+  { title: 'Doctors' },
+  { title: 'Reports' }
+];
 
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -134,14 +137,11 @@ function NavList() {
 
   return (
     <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
-<<<<<<< HEAD
-      {["Patient Registration", "Appointments", "Diagnosis", "Blood Bank", "Insurance", "Billing", "Doctors", "Reports"].map((item, index) => (
-=======
       {menuItem.map((item, index) => (
-        <NavLink to={item.navLink}>
-        <Typography key={index} as="a" href="#" variant="small" color="blue-gray" className="font-medium">
-          <ListItem className="flex items-center gap-2 py-2 pr-4">{item.title}</ListItem>
-        </Typography>
+        <NavLink to={item.navLink} key={index}>
+          <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+            <ListItem className="flex items-center gap-2 py-2 pr-4">{item.title}</ListItem>
+          </Typography>
         </NavLink>
       ))}
       <NavListMenu />

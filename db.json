@@ -95,6 +95,12 @@
       "email": "raj12@gmail.com",
       "password": "789654",
       "firstName": "nitin"
+    },
+    {
+      "id": "0cfe",
+      "email": "nitin@gmail.com",
+      "password": "789654",
+      "firstName": "nitin"
     }
   ],
   "appointment": [
