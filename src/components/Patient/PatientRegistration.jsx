@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { addPatientAsynk } from './patientListSlice';
 import { Select, Option } from '@material-tailwind/react';
-
+import { notify } from "../ToastMessage/message";
 const Registration = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [imagePreview, setImagePreview] = useState(null);
@@ -45,7 +45,9 @@ const Registration = () => {
         time: '',
         date: '',
         doctor: '',
-        notes: ''
+        notes: '',
+        appoitment:'No'
+
     })
 
 
@@ -54,7 +56,8 @@ const Registration = () => {
         console.log(values)
 
         dispatch(addPatientAsynk(values))
-        alert("Patient added successfully..")
+        notify("Patient added successfully ","success")
+        navigate('/pl')
         // data.imagePreview = imagePreview; // Attach the image preview to the data
         // navigate('/patient-card', { state: data }); // Navigate to the review page with the form data
 

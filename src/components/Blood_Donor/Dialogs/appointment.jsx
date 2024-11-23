@@ -20,7 +20,7 @@ import { format } from 'date-fns';
 import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import { useDispatch, useSelector } from "react-redux";
-import { getListAsynk, updateAsynk } from "../patientListSlice";
+import { getListAsynk, updateAsynk } from "../BloodDonorListSlice";
 import axios from "axios";
 
 export function Appointment(id) {

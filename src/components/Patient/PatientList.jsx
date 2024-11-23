@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 
 
 export function PatientListd() {
-    const TABLE_HEAD = ["Full Name", "Gender", "Email", "Contact Number", "Appointment Type", "Appointment Date", "Actions",];
+    const TABLE_HEAD = ["Full Name", "Gender", "Email", "Contact Number", "Appointment Type", "Appointment Date", "Actions", "Appointment Status"];
 
     const patient = useSelector(state => state.patient.patient)
     const dispatch = useDispatch()
@@ -31,34 +31,35 @@ export function PatientListd() {
     const [filteredPatients, setFilteredPatients] = useState(patient);
     useEffect(() => {
         const results = patient.filter(item =>
-            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchTerm.toLowerCase())
+            (item.name?.toLowerCase() ?? "").includes(searchTerm.toLowerCase()) ||
+            (item.email?.toLowerCase() ?? "").includes(searchTerm.toLowerCase())
         );
         setFilteredPatients(results);
-    }, [searchTerm, patient])
+    }, [searchTerm, patient]);
+    
 
     // 
 
-    return (<>
-
+    return (
+        <>
         <div className="mt-32 p-4">
-            
-            <div className="relative mb-5 flex justify-between">
+
+            <div className="relative mb-5 flex justify-between  me-5">
                 <input
                     type="text"
                     placeholder="Search by name or email"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-auto h-auto px-2 py-1 pl-12 border border-blue-400  rounded-xl"
+                    className=" p-2 pl-12 border border-blue-400  rounded-full"
                 />
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
                     <img src="https://cdn-icons-png.freepik.com/512/861/861627.png" className="h-5 w-5" alt="search icon" />
                 </span>
-                <div className="p-4">
+
                 <NavLink to='/pr'>
-                    <Button>Add Patient</Button>
+                    <Button className="" size="sm" color="red">Add Patient</Button>
                 </NavLink>
-            </div>
+
             </div>
 
             <Card className="h-full w-full overflow-scroll rounded-none">
@@ -170,25 +171,23 @@ export function PatientListd() {
                                             className="font-medium"
                                         >
                                             <div className="flex gap-2">
-                                            <ViewDialog id={item.id} profile={item.profile} DOB={item.DOB} age={item.age} gender={item.gender} contact={item.contact} name={item.name} address={item.address} blood_group={item.blood_group} email={item.email} />
+                                                <ViewDialog id={item.id} profile={item.profile} DOB={item.DOB} age={item.age} gender={item.gender} contact={item.contact} name={item.name} address={item.address} blood_group={item.blood_group} email={item.email} appoitment={item.appoitment} />
                                                 <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" className="h-4" onClick={() => dispatch(deleteAsynk(item.id))} alt="" /><img src="" alt="" className="h-5" />
                                             </div>
                                         </Typography>
                                     </td>
 
-                                    {/* <td className={classes}>
+                                    <td className={classes}>
                                         <Typography
                                             as="a"
                                             href="#"
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-medium"
+                                            className="text-green-800 font-bold"
                                         >
-                                            <div className="flex gap-2">
-                                                <Appointment id={item.id} />
-                                            </div>
+                                            {item.appoitment}
                                         </Typography>
-                                    </td> */}
+                                    </td>
                                 </tr>
                             );
                         })}

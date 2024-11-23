@@ -1,57 +1,58 @@
-import { Button, Card, Typography } from "@material-tailwind/react";
+import { useSelect } from "@material-tailwind/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAsynk, getListAsynk } from "./patientListSlice";
-import { ViewDialog } from "./Dialogs/view";
-import { Appointment } from "./Dialogs/appointment";
+import { deleteDoctorsAsynk, getdoctorsListAsynk } from "./doctorsSlice";
+import { NavLink, useNavigate } from "react-router-dom";
+import { Button, Card, Typography } from "@material-tailwind/react";
+import { notify } from "../ToastMessage/message";
 
-export function PatientList() {
-    const TABLE_HEAD = ["Profile", "Full Name", "Gender", "Email", "Contact Number", "Appointment Type", "Appointment Date", "Actions", "Appointment"];
+import 'react-toastify/dist/ReactToastify.css';
 
-    const patient = useSelector(state => state.patient.patient)
-    const dispatch = useDispatch()
 
-    // Image zoom
-    const [zoomedIndex, setZoomedIndex] = useState(null);
-    const handleClick = (index) => {
-        setZoomedIndex(zoomedIndex === index ? null : index);
-    };
-
-    //   
+export function DoctorList() {
+    const TABLE_HEAD = ["Profile", "Full Name", "Specialist", "Email", "Contact Number", "Gender", "Actions"];
+    const doctors = useSelector(state => state.doctors.doctors)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getListAsynk())
-
+        dispatch(getdoctorsListAsynk())
     }, [dispatch])
 
     // Search patient 
     const [searchTerm, setSearchTerm] = useState("");
-    const [filteredPatients, setFilteredPatients] = useState(patient);
+    const [filteredPatients, setFilteredPatients] = useState(doctors);
     useEffect(() => {
-        const results = patient.filter(item =>
-            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchTerm.toLowerCase())
+        const results = doctors.filter(item =>
+            item.fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.specialist.toLowerCase().includes(searchTerm.toLowerCase())
+            
         );
         setFilteredPatients(results);
-    }, [searchTerm, patient])
-
+    }, [searchTerm, doctors])
+   
     // 
-
     return (<>
-
-        <div className="mt-32 p-4">
-            <div className="relative mb-5 ">
+        <div className="mt-32 p-4 ">
+            {/* <Button onClick={() => { notify("") }}>Toast Message</Button> */}
+           
+            <div className="relative mb-5 flex justify-between  me-5">
                 <input
                     type="text"
                     placeholder="Search by name or email"
                     value={searchTerm}
-                    
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="p-2 pl-12 border border-blue-400  rounded-full"
+                    className=" p-2 pl-12 border border-blue-400  rounded-full"
                 />
                 <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
                     <img src="https://cdn-icons-png.freepik.com/512/861/861627.png" className="h-5 w-5" alt="search icon" />
                 </span>
+
+                <NavLink to='adddoctor'>
+                    <Button className="" size="sm" color="red">Add Doctors</Button>
+                </NavLink>
+
             </div>
 
             <Card className="h-full w-full overflow-scroll rounded-none">
@@ -76,25 +77,34 @@ export function PatientList() {
                     </thead>
                     <tbody>
                         {filteredPatients.map((item, index) => {
-                            const isLast = index === patient.length - 1;
+                            const isLast = index === doctors.length - 1;
                             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
                             return (
                                 <tr key={name}>
+                                    {/* <td className={classes}>
+                            <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                            >
+                                <div key={index}
+                                    className={`  cursor-pointer  ${zoomedIndex === index ? 'z-10' : ''}`}
+                                    onClick={() => handleClick(index)}>
+
+                                    <img src={item.profile} className={`max-h-10 rounded-full transition-transform duration-300 ${zoomedIndex === index ? 'scale-[4] ms-20' : 'scale-100'}`} alt="" />
+                                </div>
+
+
+                            </Typography>
+                        </td> */}
                                     <td className={classes}>
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
                                             className="font-normal"
                                         >
-                                            <div key={index}
-                                                className={`  cursor-pointer  ${zoomedIndex === index ? 'z-10' : ''}`}
-                                                onClick={() => handleClick(index)}>
-
-                                                <img src={item.profile} className={`max-h-10 max-w-20 rounded-full transition-transform overflow-hidden duration-300 ${zoomedIndex === index ? 'scale-[4] ms-20' : 'scale-100'}`} alt="" />
-                                            </div>
-
-
+                                            <img src={item.profile} className="h-10 rounded-full" alt="" />
                                         </Typography>
                                     </td>
                                     <td className={classes}>
@@ -103,7 +113,7 @@ export function PatientList() {
                                             color="blue-gray"
                                             className="font-normal"
                                         >
-                                            {item.name}
+                                            <span className="font-bold">{item.title}. </span>{item.fname + " " + item.mname + " " + item.lname}
                                         </Typography>
                                     </td>
                                     <td className={classes}>
@@ -112,9 +122,10 @@ export function PatientList() {
                                             color="blue-gray"
                                             className="font-normal"
                                         >
-                                            {item.gender}
+                                            {item.specialist}
                                         </Typography>
                                     </td>
+
                                     <td className={classes}>
                                         <Typography
                                             variant="small"
@@ -141,17 +152,7 @@ export function PatientList() {
                                             color="blue-gray"
                                             className="font-normal"
                                         >
-                                            {item.type}
-                                        </Typography>
-                                    </td>
-
-                                    <td className={classes}>
-                                        <Typography
-                                            variant="small"
-                                            color="blue-gray"
-                                            className="font-normal"
-                                        >
-                                            {item.date}
+                                            {item.gender}
                                         </Typography>
                                     </td>
                                     <td className={classes}>
@@ -163,8 +164,8 @@ export function PatientList() {
                                             className="font-medium"
                                         >
                                             <div className="flex gap-2">
-                                                <ViewDialog id={item.id} profile={item.profile} doctor={item.doctor} time={item.time} reason={item.reason} type={item.type} name={item.name} date={item.date} notes={item.notes} email={item.email} />
-                                                <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" className="h-4" onClick={() => dispatch(deleteAsynk(item.id))} alt="" /><img src="" alt="" className="h-5" />
+                                                {/* <ViewDialog id={item.id} profile={item.profile} DOB={item.DOB} age={item.age} gender={item.gender} contact={item.contact} name={item.name} address={item.address} blood_group={item.blood_group} email={item.email} appoitment={item.appoitment} /> */}
+                                                <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" className="h-4" onClick={() => dispatch(deleteDoctorsAsynk(item.id))} alt="" /><img src="" alt="" className="h-5" />
                                             </div>
                                         </Typography>
                                     </td>
@@ -175,11 +176,9 @@ export function PatientList() {
                                             href="#"
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-medium"
+                                            className="text-green-800 font-bold"
                                         >
-                                            <div className="flex gap-2">
-                                                <Appointment id={item.id} />
-                                            </div>
+                                            {item.appoitment}
                                         </Typography>
                                     </td>
                                 </tr>
@@ -189,7 +188,5 @@ export function PatientList() {
                 </table>
             </Card>
         </div>
-
-
     </>)
 }

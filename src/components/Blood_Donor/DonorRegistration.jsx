@@ -14,7 +14,7 @@ function RegisterDonor() {
   };
 
   return (
-    <NavLink to="/Dr" className="flex justify-center items-center h-auto bg-gray-100 pt-24 mb-5 ">
+    <div className="flex justify-center items-center h-auto bg-gray-100 pt-24 mb-5 ">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white p-8 shadow-lg w-full max-w-2xl border border-gray-600 rounded-lg"
@@ -200,14 +200,16 @@ function RegisterDonor() {
           )}
         </div>
 
+        <NavLink to='/bd'>
         <button
           type="submit"
           className="w-full bg-black text-white font-bold py-2 px-4 mt-6 rounded hover:bg-gray-800 transition duration-300"
         >
           Submit
         </button>
+        </NavLink>
       </form>
-    </NavLink>
+    </div>
   );
 }
 

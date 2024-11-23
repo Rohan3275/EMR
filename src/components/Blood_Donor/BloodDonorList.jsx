@@ -1,0 +1,122 @@
+import { Button, Card, Typography } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteAsynk, getListAsynk } from "./BloodDonorListSlice";
+import { ViewDialog } from "./Dialogs/view";
+import { NavLink } from "react-router-dom";
+
+export function Blood_DonorList() {
+    const TABLE_HEAD = ["Full Name", "Email", "Contact Number", "Blood Group"];
+    const donor = useSelector((state) => state.donor || []);
+    const dispatch = useDispatch();
+
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredDonor, setFilteredDonor] = useState([]);
+    const [zoomedIndex, setZoomedIndex] = useState(null);
+
+    useEffect(() => {
+        dispatch(getListAsynk());
+    }, [dispatch]);
+
+    // useEffect(() => {
+    //     setFilteredDonor(donor);
+    // }, [donor]);
+
+    useEffect(() => {
+        const results = donor.filter((item) =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.email.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setFilteredDonor(results);
+    }, [searchTerm, donor]);
+
+    // useEffect(() => {
+    //     setZoomedIndex(null);
+    // }, [filteredDonor]);
+
+    const handleClick = (index) => {
+        setZoomedIndex(zoomedIndex === index ? null : index);
+    };
+
+    return (
+        <div className="mt-32 p-4">
+            <div className="relative mb-5 flex justify-between me-5">
+                <input
+                    type="text"
+                    placeholder="Search by name or email"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="p-2 pl-12 border border-blue-400 rounded-full"
+                />
+                <span className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                    <img src="https://cdn-icons-png.freepik.com/512/861/861627.png" className="h-5 w-5" alt="search icon" />
+                </span>
+                <NavLink to="/b_donor">
+                    <Button size="sm" color="red">
+                        Add Donor
+                    </Button>
+                </NavLink>
+            </div>
+
+            <Card className="h-full w-full overflow-scroll rounded-none">
+                <table className="w-full min-w-max table-auto text-left">
+                    <thead>
+                        <tr>
+                            {TABLE_HEAD.map((head) => (
+                                <th key={head} className="border-b border-blue-gray-100 bg-blue-gray-50 p-4">
+                                    <Typography variant="small" color="blue-gray" className="font-bold opacity-70">
+                                        {head}
+                                    </Typography>
+                                </th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {filteredDonor.map((item, index) => {
+                            const isLast = index === filteredDonor.length - 1;
+                            const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
+
+                            return (
+                                <tr key={item.id}>
+                                    <td className={classes}>
+                                        <Typography variant="small" color="blue-gray">
+                                            {item.name}
+                                        </Typography>
+                                    </td>
+                                    <td className={classes}>
+                                        <Typography variant="small" color="blue-gray">
+                                            {item.email}
+                                        </Typography>
+                                    </td>
+                                    <td className={classes}>
+                                        <Typography variant="small" color="blue-gray">
+                                            {item.contact}
+                                        </Typography>
+                                    </td>
+                                    <td className={classes}>
+                                        <Typography variant="small" color="blue-gray">
+                                            {item.blood_group}
+                                        </Typography>
+                                    </td>
+                                    <td className={classes}>
+                                        <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+                                            <div className="flex gap-2">
+                                                <ViewDialog {...item} />
+                                                <img
+                                                    src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png"
+                                                    className="h-4"
+                                                    onClick={() => dispatch(deleteAsynk(item.id))}
+                                                    alt="delete icon"
+                                                />
+                                            </div>
+                                        </Typography>
+                                    </td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
+            </Card>
+        </div>
+    );
+}

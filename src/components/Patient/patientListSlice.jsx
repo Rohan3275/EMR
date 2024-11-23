@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { addPatient, deleteList, getList, updateList } from "./patientListApi"
+import { notify } from "../ToastMessage/message";
 
 
 
@@ -48,6 +49,7 @@ export const patientSlice = createSlice({
                 state.patient = state.patient.filter(patient => patient.id !== action.payload)
             }).addCase(deleteAsynk.rejected, (state) => {
                 state.status = 'idle';
+                
 
             })
     }

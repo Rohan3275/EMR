@@ -1,248 +1,103 @@
-
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, Link, NavLink as RouterNavLink } from "react-router-dom";
+import { AuthContext } from "../AuthContext";
 import {
   Navbar,
   Collapse,
   Typography,
-  
-  IconButton,
   List,
   ListItem,
   Menu,
   MenuHandler,
   MenuList,
   MenuItem,
+  IconButton,
+  Button,
 } from "@material-tailwind/react";
+import img from '../assets/images/logo-2.png';
+import { UserIcon, ChevronDownIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { notify } from "./ToastMessage/message";
+import { ToastContainer } from "react-toastify";  // Make sure it's imported globally
 
-import img from '../assets/images/logo-2.png'
-
-import {
-  ChevronDownIcon,
-  Bars3Icon,
-  XMarkIcon,
-  ChevronUpIcon,
-} from "@heroicons/react/24/outline";
-import { NavLink } from "react-router-dom";
-
-
-const nestedMenuItems = [
-  {
-    title: "Hero",
-  },
-  {
-    title: "Features",
-  },
-  {
-    title: "Testimonials",
-  },
-  {
-    title: "Ecommerce",
-  },
+const menuItem = [
+  { title: 'Patient', navLink: '/pl' },
+  { title: 'Appointment', navLink: '/p_list' },
+  { title: 'Diagnosis' },
+  { title: 'Blood Bank', navLink: '/b_list' },
+  { title: 'Insurance' },
+  { title: 'Billing' },
+  { title: 'Doctors', navLink: '/doctor' },
+  { title: 'Reports' }
 ];
 
-function NavListMenu() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [openNestedMenu, setopenNestedMenu] = React.useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const renderItems = nestedMenuItems.map(({ title }, key) => (
-    <a href="#" key={key}>
-      <MenuItem>{title}</MenuItem>
-    </a>
-  ));
-
-  return (
-    <React.Fragment>
-      <Menu
-        open={isMenuOpen}
-        handler={setIsMenuOpen}
-        placement="bottom"
-        allowHover={true}
-      >
-        <MenuHandler>
-          <Typography as="div" variant="small" className="font-medium">
-            <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
-              selected={isMenuOpen || isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
-            >
-              Blocks
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""
-                  }`}
-              />
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""
-                  }`}
-              />
-            </ListItem>
-          </Typography>
-        </MenuHandler>
-        <MenuList className="hidden rounded-xl lg:block">
-          <Menu
-            placement="right-start"
-            allowHover
-            offset={15}
-            open={openNestedMenu}
-            handler={setopenNestedMenu}
-          >
-            <MenuHandler className="flex items-center justify-between">
-              <MenuItem>
-                Figma
-                <ChevronUpIcon
-                  strokeWidth={2.5}
-                  className={`h-3.5 w-3.5 transition-transform ${isMenuOpen ? "rotate-90" : ""
-                    }`}
-                />
-              </MenuItem>
-            </MenuHandler>
-            <MenuList className="rounded-xl">{renderItems}</MenuList>
-          </Menu>
-          <MenuItem>React</MenuItem>
-          <MenuItem>TailwindCSS</MenuItem>
-        </MenuList>
-      </Menu>
-      <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>
-          <Menu
-            placement="bottom"
-            allowHover
-            offset={6}
-            open={openNestedMenu}
-            handler={setopenNestedMenu}
-          >
-            <MenuHandler className="flex items-center justify-between">
-              <MenuItem>
-                Figma
-                <ChevronUpIcon
-                  strokeWidth={2.5}
-                  className={`h-3.5 w-3.5 transition-transform ${isMenuOpen ? "rotate-90" : ""
-                    }`}
-                />
-              </MenuItem>
-            </MenuHandler>
-            <MenuList className="block rounded-xl lg:hidden">
-              {renderItems}
-            </MenuList>
-          </Menu>
-          <MenuItem>React</MenuItem>
-          <MenuItem>TailwindCSS</MenuItem>
-        </Collapse>
-      </div>
-    </React.Fragment>
-  );
-}
-
 function NavList() {
+  const { user, logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  // Check localStorage for data
+  const [localStorageData, setLocalStorageData] = useState(null);
+
+  useEffect(() => {
+    const data = localStorage.getItem('user');
+    setLocalStorageData(data);
+  }, []);
+
+  // Handle logout
+  const handleLogout = () => {
+    logout();
+    notify("You have been logged out successfully!", "success");  // Call notify when logout happens
+    navigate("/home");
+    location.reload() // optional
+  };
+
+  // Handle navigation link click
+  const handleNavLinkClick = (e, navLink) => {
+    if (!localStorageData && navLink) {
+      e.preventDefault();
+      notify("Please login to access this page.", "error")
+    }
+  };
+
   return (
     <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <NavLink to='/pl'>
-
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Patient</ListItem></NavLink>
-      </Typography>
-      <NavLink to={'p_list'}>
-        <Typography
-          as="a"
-          href="#"
-          variant="small"
-          color="blue-gray"
-          className="font-medium"
+      {menuItem.map((item, index) => (
+        <RouterNavLink
+          key={index}
+          to={item.navLink || "#"}  // If no navLink, don't navigate
+          onClick={(e) => handleNavLinkClick(e, item.navLink)}
         >
-          <ListItem className="flex items-center gap-2 py-2 pr-4">
-            Appointments
-          </ListItem>
-        </Typography>
-      </NavLink>
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Diagnosis
-        </ListItem>
-      </Typography>
+          <Typography as="a" variant="small" color="blue-gray" className="font-medium">
+            <ListItem className="flex items-center gap-2 py-2 pr-4">
+              {item.title}
+            </ListItem>
+          </Typography>
+        </RouterNavLink>
+      ))}
 
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Blood Bank
-        </ListItem>
-      </Typography>
-
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Insurance
-        </ListItem>
-      </Typography>
-
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Billing
-        </ListItem>
-      </Typography>
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Doctors
-        </ListItem>
-      </Typography>
-
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
-          Reports
-        </ListItem>
-      </Typography>
-      <NavListMenu />
-
-
-      <Typography
-        as="a"
-        href="#"
-        variant="small"
-        color="blue-gray"
-        className="font-medium"
-      >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Docs</ListItem>
-      </Typography>
+      {/* Logout button when user is logged in */}
+      {!user ? (
+        <Link to="/login">
+          <Button size="sm" variant="outlined" color="blue">Login</Button>
+        </Link>
+      ) : (
+        <Menu placement="bottom-end" allowHover>
+          <MenuHandler>
+            <ListItem className="flex items-center gap-2 py-1 pr-2 w-30">
+              {user.profileImage ? (
+                <img src={user.profileImage} alt="Profile" className="h-6 w-6 rounded-full" />
+              ) : (
+                <UserIcon className="h-6 w-6 text-gray-600" />
+              )}
+              <ChevronDownIcon className="h-4 w-4" />
+            </ListItem>
+          </MenuHandler>
+          <MenuList className="rounded-xl">
+            <MenuItem>
+              <button onClick={handleLogout}>Logout</button>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      )}
     </List>
   );
 }
@@ -251,60 +106,30 @@ export function MainNavbar() {
   const [openNav, setOpenNav] = React.useState(false);
 
   React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false),
-    );
+    const handleResize = () => window.innerWidth >= 960 && setOpenNav(false);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   return (
-    <div className="">
-      <Navbar className=" max-w-full  mx-auto  rounded-none shadow-none fixed z-20 top-0  p-0  " >
-        <div className="flex items-center justify-between text-blue-gray-900 ">
-          <Typography
-            as="a"
-            href="#"
-            variant="h6"
-            className="mr-4 text-2exportxl cursor-pointer py-1.5 lg:ml-2 pt-serif-bold-italic text-2xl"
-          >
-            <NavLink to='/'><img src={img} className="h-14" alt="Loading..." /></NavLink>
-          </Typography>
-
-          <div className="hidden lg:block">
-            <NavList />
-          </div>
-          {/* <div className="hidden gap-2 lg:flex">
-          <Button size="sm">Get Started</Button>
-          <Button variant="outlined" size="sm">
-            Log In
-          </Button>
-        </div> */}
-          <IconButton
-            variant="text"
-            className="lg:hidden"
-            onClick={() => setOpenNav(!openNav)}
-          >
-            {openNav ? (
-              <XMarkIcon className="h-6 w-6" strokeWidth={2} />
-            ) : (
-              <Bars3Icon className="h-6 w-6" strokeWidth={2} />
-            )}
-          </IconButton>
-        </div>
-        <Collapse open={openNav}>
+    <Navbar className="max-w-full mx-auto rounded-none shadow-none fixed z-20 top-0 p-0">
+      <div className="flex items-center justify-between text-blue-gray-900">
+        <Typography as="a" href="/home" variant="h6" className="mr-4 text-2xl cursor-pointer py-1.5 lg:ml-2">
+          <img src={img} className="h-14" alt="Logo" />
+        </Typography>
+        <div className="hidden lg:block">
           <NavList />
-          {/* <div className="flex w-full flex-nowrap items-center gap-2 lg:hidden">
-          <Button size="sm" fullWidth>
-            Get Started
-          </Button>
-          <Button variant="outlined" size="sm" fullWidth>
-            Log In
-          </Button>
-        </div> */}
-        </Collapse>
-      </Navbar>
-    </div>
+        </div>
+        <IconButton variant="text" className="lg:hidden" onClick={() => setOpenNav(!openNav)}>
+          {openNav ? <XMarkIcon className="h-6 w-6" strokeWidth={2} /> : <Bars3Icon className="h-6 w-6" strokeWidth={2} />}
+        </IconButton>
+      </div>
+      <Collapse open={openNav}>
+        <NavList />
+      </Collapse>
 
+      {/* ToastContainer should be placed globally in the layout or main component */}
+      <ToastContainer />
+    </Navbar>
   );
 }
-

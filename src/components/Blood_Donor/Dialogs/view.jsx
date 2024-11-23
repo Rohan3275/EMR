@@ -21,7 +21,7 @@ export function ViewDialog({ id, profile, name, DOB, email, contact, gender, age
             <img src="https://cdn-icons-png.flaticon.com/512/7324/7324909.png" alt="" className="h-5" onClick={handleOpen} />
 
             <Dialog open={open} handler={handleOpen}>
-                <DialogHeader>Patient Details</DialogHeader>
+                <DialogHeader>Appointment Details</DialogHeader>
                 <DialogBody>
                     <Card className="border border-yellow-800 ">
                         <CardBody>

@@ -13,7 +13,7 @@ import {
     DialogHeader,
     DialogFooter,
 } from "@material-tailwind/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css'; // Import styles
 import { format } from 'date-fns';
@@ -21,6 +21,9 @@ import TimePicker from 'react-time-picker';
 import 'react-time-picker/dist/TimePicker.css';
 import { useDispatch, useSelector } from "react-redux";
 import { getListAsynk, updateAsynk } from "../patientListSlice";
+
+import { getdoctorsListAsynk } from "../../../Doctor/doctorsSlice";
+
 import axios from "axios";
 
 export function Appointment(id) {
@@ -42,9 +45,19 @@ export function Appointment(id) {
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
+    
         setValues({ ...values, date: format(date, 'MM/dd/yyyy') });
         setIsOpen(false); // Close the calendar after selecting
     };
+    // 
+
+    // getDoctors
+    const dispatch = useDispatch();
+    const doctors = useSelector(state => state.doctors.doctors)
+    useEffect(() => {
+        dispatch(getdoctorsListAsynk());
+    }, [dispatch])
+
     // 
 
     const [values, setValues] = useState({
@@ -54,7 +67,8 @@ export function Appointment(id) {
         time: '',
         date: '',
         doctor: '',
-        notes: ''
+        notes: '',
+        appoitment: 'Yes'
     })
 
     const handleOpen = () => setOpen(!open);
@@ -68,13 +82,13 @@ export function Appointment(id) {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.patch("http://localhost:3000/appointment/" + id.id, values)
-            .then(res => { alert("Appointment Shedule Successefully...."); location.reload() })
+            .then(res => {alert("Appointment Sheduled Successfully"); location.reload() })
             .catch(err => console.log(err))
 
     }
 
     return (<>
-        <Button onClick={handleOpen} size="sm" color="orange"  variant="outlined">
+        <Button onClick={handleOpen} size="sm" color="orange" variant="outlined">
             Appointment
         </Button>
         <Dialog open={open} handler={handleOpen} size="xl">
@@ -168,11 +182,11 @@ export function Appointment(id) {
                             value={values.doctor} // Set the current value
                             onChange={(value) => setValues({ ...values, doctor: value })} // Use the value directly
                         >
-                            <Option value="Dr. Smith">Dr. Smith</Option>
-                            <Option value="Dr. Johnson">Dr. Johnson</Option>
-                            <Option value="Dr. Lee">Dr. Lee</Option>
-                            <Option value="Dr. Brown">Dr. Brown</Option>
-                            <Option value="Dr. Wilson">Dr. Wilson</Option>
+                            {
+                                doctors.map((doct) => (
+                                    <Option value={doct.fname + " " + doct.mname + " " + doct.lname}><span>Dr.</span> {doct.fname + " " + doct.mname + " " + doct.lname}</Option>
+                                ))
+                            }
                         </Select>
                     </div>
 
