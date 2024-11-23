@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -15,8 +14,8 @@ const AddCategory = () => {
     axios
       .post("http://localhost:5000/categories", { category, shortName })
       .then(() => {
-        // Redirect to manage categories after adding
-        navigate("/");
+        // Redirect to the manage categories page after adding
+        navigate("/managecategories");
       })
       .catch((error) => {
         console.error("There was an error adding the category!", error);
@@ -24,7 +23,7 @@ const AddCategory = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-24 mb-16">
       <h2 className="text-2xl font-bold mb-4">Add Category</h2>
       <form onSubmit={handleSubmit} className="space-y-4 bg-gray-100 p-6 rounded-md shadow-md">
         {/* Inputs Container */}

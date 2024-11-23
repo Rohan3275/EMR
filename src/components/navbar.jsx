@@ -105,7 +105,7 @@ function NavListMenu() {
             </NavLink>
             {/* <MenuList className="rounded-xl">{renderItems}</MenuList> */}
           </Menu>
-          <NavLink to={"/category"} onClick={(e) => handleNavLinkClick(e, "/category")}>
+          <NavLink to={"/managecategories"} onClick={(e) => handleNavLinkClick(e, "/managecategories")}>
             <MenuItem>Category</MenuItem></NavLink>
           {/* <MenuItem>TailwindCSS</MenuItem> */}
         </MenuList>

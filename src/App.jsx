@@ -40,7 +40,7 @@ function App() {
           <Route path="/tpList/ptest" element={<PatientTest />} />
           <Route path="/doctor" element={<DoctorList />} />
           <Route path="/managecategories" element={<ManageCategories />} />
-        <Route path="/add-category" element={<AddCategory />} />
+          <Route path="/add-category" element={<AddCategory />} />
           <Route path="/doctor/adddoctor" element={<AddDoctors />} />
          
           <Route

@@ -59,7 +59,7 @@ const ManageCategories = () => {
   const currentItems = filteredCategories.slice(startIndex, endIndex);
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 mt-24">
       <h2 className="text-2xl font-bold mb-4">Manage Categories</h2>
 
       {/* Add Category and Export Buttons */}
