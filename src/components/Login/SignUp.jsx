@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { AuthContext } from "../../AuthContext";
+import { AuthContext } from "../../AuthContext"; // Adjust the import path as needed
 import { useNavigate, Link } from "react-router-dom";
 
 const SignUp = () => {
@@ -20,7 +20,6 @@ const SignUp = () => {
     city: "",
     state: "",
     profileImage: null, // Added for profile image
-    countryCode: "+91", // Default country code
     agreeToTerms: false,
   });
 
@@ -54,16 +53,6 @@ const SignUp = () => {
     if (!formData.city) newErrors.city = "City is required";
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.agreeToTerms) newErrors.agreeToTerms = "You must agree to the terms and conditions";
-
-    // Profile Image validation
-    if (formData.profileImage) {
-      const file = formData.profileImage;
-      if (file.size > 5000000) {
-        newErrors.profileImage = "File size must be less than 5MB";
-      } else if (!file.type.startsWith("image/")) {
-        newErrors.profileImage = "Only image files are allowed";
-      }
-    }
 
     setErrors(newErrors);
 
@@ -120,8 +109,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100 mt-20">
-      <div className="bg-white border border-blue-600 rounded-lg shadow-xl w-full max-w-lg p-8">
+    <div className="min-h-screen flex justify-center items-center mt-28 mb-28">
+      <div className="bg-white border border-blue-600 rounded-lg shadow-xl w-full max-w-3xl p-8">
         <h2 className="text-2xl font-semibold text-center text-blue-600 mb-6">Sign Up Now</h2>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -217,6 +206,7 @@ const SignUp = () => {
                 <option value="+86">+86 (China)</option>
                 <option value="+49">+49 (Germany)</option>
                 <option value="+33">+33 (France)</option>
+                {/* Add more country codes as needed */}
               </select>
 
               {/* Mobile Number Input */}
@@ -245,13 +235,26 @@ const SignUp = () => {
             {errors.dob && <p className="text-red-500 text-xs mt-1">{errors.dob}</p>}
           </div>
 
-          
+          {/* Disease Name */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Disease Name</label>
+            <input
+              name="disease"
+              type="text"
+              placeholder="Enter disease name"
+              value={formData.disease}
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md p-2"
+            />
+            {errors.disease && <p className="text-red-500 text-xs mt-1">{errors.disease}</p>}
+          </div>
 
           {/* Address */}
-          <div>
+          <div className="col-span-1 md:col-span-2">
             <label className="block text-sm font-medium text-gray-700">Address</label>
-            <textarea
+            <input
               name="address"
+              type="text"
               placeholder="Enter your address"
               value={formData.address}
               onChange={handleChange}
@@ -266,7 +269,7 @@ const SignUp = () => {
             <input
               name="city"
               type="text"
-              placeholder="Enter your city"
+              placeholder="Enter city"
               value={formData.city}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md p-2"
@@ -280,7 +283,7 @@ const SignUp = () => {
             <input
               name="state"
               type="text"
-              placeholder="Enter your state"
+              placeholder="Enter state"
               value={formData.state}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md p-2"
@@ -288,47 +291,53 @@ const SignUp = () => {
             {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state}</p>}
           </div>
 
-         
-
-
-          {/* Terms and Conditions */}
-          <div className="col-span-2">
-            <label className="inline-flex items-center">
-              <input
-                type="checkbox"
-                name="agreeToTerms"
-                checked={formData.agreeToTerms}
-                onChange={handleChange}
-                className="form-checkbox"
-              />
-              <span className="ml-2 text-sm">I agree to the Terms and Conditions</span>
-            </label>
-            {errors.agreeToTerms && <p className="text-red-500 text-xs mt-1">{errors.agreeToTerms}</p>}
+          {/* Profile Image */}
+          <div className="col-span-1 md:col-span-2">
+            <label className="block text-sm font-medium text-gray-700">Profile Image</label>
+            <input
+              name="profileImage"
+              type="file"
+              accept="image/*"
+              onChange={handleChange}
+              className="w-full border border-gray-300 rounded-md p-2"
+            />
           </div>
+
+          {/* Agree to Terms */}
+          <div className="col-span-1 md:col-span-2 flex items-center">
+            <input
+              type="checkbox"
+              name="agreeToTerms"
+              checked={formData.agreeToTerms}
+              onChange={handleChange}
+              className="h-4 w-4 text-blue-600 border-gray-300 rounded mr-2"
+            />
+            <label className="text-sm text-gray-700">
+              I agree with the{" "}
+              <a href="/terms" className="text-blue-500 hover:underline">terms and conditions</a>.
+            </label>
+          </div>
+          {errors.agreeToTerms && <p className="col-span-1 md:col-span-2 text-red-500 text-xs mt-1">{errors.agreeToTerms}</p>}
 
           {/* Submit Button */}
-          <div className="col-span-2 text-center">
+          <div className="col-span-1 md:col-span-2">
             <button
               type="submit"
+              className={`w-full bg-blue-500 text-white p-2 rounded-lg font-semibold text-lg hover:bg-blue-600 transition ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={loading}
-              className="w-full bg-blue-600 text-white py-2 rounded-md disabled:bg-gray-300"
             >
-              {loading ? "Signing Up..." : "Sign Up"}
+              {loading ? 'Signing Up...' : 'Sign Up'}
             </button>
           </div>
-        </form>
 
-        {/* Already have an account */}
-        <div className="mt-4 text-center">
-          <p className="text-sm">
-            Already have an account?{" "}
-            <Link to="/login" className="text-blue-600">Login</Link>
-          </p>
-        </div>
+          <div className="col-span-1 md:col-span-2 text-center">
+            <p className="text-gray-600 inline">Already have an account?{" "}</p>
+            <Link to="/login" className="text-blue-500 hover:underline">Login</Link>
+          </div>
+        </form>
       </div>
     </div>
   );
 };
 
 export default SignUp;
-

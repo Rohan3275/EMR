@@ -27,16 +27,16 @@ export function DoctorList() {
             item.fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
             item.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
             item.specialist.toLowerCase().includes(searchTerm.toLowerCase())
-            
+
         );
         setFilteredPatients(results);
     }, [searchTerm, doctors])
-   
+
     // 
     return (<>
-        <div className="mt-32 p-4 ">
+        <div className="mt-24 p-4 ">
             {/* <Button onClick={() => { notify("") }}>Toast Message</Button> */}
-           
+
             <div className="relative mb-5 flex justify-between  me-5">
                 <input
                     type="text"
@@ -82,22 +82,7 @@ export function DoctorList() {
 
                             return (
                                 <tr key={name}>
-                                    {/* <td className={classes}>
-                            <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-normal"
-                            >
-                                <div key={index}
-                                    className={`  cursor-pointer  ${zoomedIndex === index ? 'z-10' : ''}`}
-                                    onClick={() => handleClick(index)}>
-
-                                    <img src={item.profile} className={`max-h-10 rounded-full transition-transform duration-300 ${zoomedIndex === index ? 'scale-[4] ms-20' : 'scale-100'}`} alt="" />
-                                </div>
-
-
-                            </Typography>
-                        </td> */}
+                                   
                                     <td className={classes}>
                                         <Typography
                                             variant="small"
@@ -120,7 +105,7 @@ export function DoctorList() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="font-bold"
                                         >
                                             {item.specialist}
                                         </Typography>
@@ -170,17 +155,7 @@ export function DoctorList() {
                                         </Typography>
                                     </td>
 
-                                    <td className={classes}>
-                                        <Typography
-                                            as="a"
-                                            href="#"
-                                            variant="small"
-                                            color="blue-gray"
-                                            className="text-green-800 font-bold"
-                                        >
-                                            {item.appoitment}
-                                        </Typography>
-                                    </td>
+
                                 </tr>
                             );
                         })}

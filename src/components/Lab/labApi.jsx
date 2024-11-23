@@ -1,7 +1,7 @@
-import axios from "axios";
+import axios from "axios"
 
-export function getDoctors() {
-    return axios.get("http://localhost:3000/doctors")
+export function getLabPatient() {
+    return axios.get("http://localhost:3000/test")
 }
 
 export function deleteDoctorList(id) {
