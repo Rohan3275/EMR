@@ -16,6 +16,9 @@ import { AuthProvider } from "./AuthContext";
 import Login from "./components/Login/Login";
 import SignUp from "./components/Login/SignUp";
 import PrivateRoute from "./components/Login/PrivateRoute";
+import { TestPatientList } from "./components/Doctor/Test/TestPatientList";
+import { PatientTest } from './components/Doctor/Test/TestSubPages/patientTest';
+import { LabList } from './components/Lab/LabList';
 function App() {
 
   return (
@@ -30,8 +33,13 @@ function App() {
           <Route path='/pl' element={<PatientListd />} />
           <Route path='/pr' element={<Registration />} />
           <Route path='/p_list' element={<PatientList />} />
+          <Route path='/lab' element={<LabList />} />
+          <Route path="/tpList" element={<TestPatientList/>} />
+          <Route path="/tpList/ptest" element={<PatientTest />} />
           <Route path="/doctor" element={<DoctorList />} />
+        
           <Route path="/doctor/adddoctor" element={<AddDoctors />} />
+         
           <Route
             path="/home"
             element={

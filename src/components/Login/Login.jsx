@@ -35,8 +35,9 @@ const Login = () => {
 
       if (success) {
 
-        notify("login done")
+
         navigate("/home");
+        notify("login done")
         location.reload()
       } else {
         setError({ credentials: "Invalid email or password" });
@@ -46,9 +47,9 @@ const Login = () => {
 
   return (
 
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+    <div className="flex items-center justify-center min-h-screen ">
 
-      <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-lg shadow-md border-2 border-blue-500">
+      <div className="w-full max-w-sm p-8 space-y-6 bg-white rounded-lg shadow-md border border-blue-500 ">
         <h2 className="text-2xl font-bold text-center text-gray-900">Login</h2>
 
         {error.credentials && <p className="text-red-500 mb-4">{error.credentials}</p>}
@@ -104,7 +105,7 @@ const Login = () => {
           </p>
         </div>
       </div>
-     <ToastContainer/>
+      <ToastContainer />
     </div>
   );
 };

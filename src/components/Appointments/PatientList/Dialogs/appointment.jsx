@@ -45,7 +45,7 @@ export function Appointment(id) {
 
     const handleDateChange = (date) => {
         setSelectedDate(date);
-    
+
         setValues({ ...values, date: format(date, 'MM/dd/yyyy') });
         setIsOpen(false); // Close the calendar after selecting
     };
@@ -82,7 +82,7 @@ export function Appointment(id) {
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.patch("http://localhost:3000/appointment/" + id.id, values)
-            .then(res => {alert("Appointment Sheduled Successfully"); location.reload() })
+            .then(res => { alert("Appointment Sheduled Successfully"); location.reload() })
             .catch(err => console.log(err))
 
     }
