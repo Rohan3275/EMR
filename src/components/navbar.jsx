@@ -314,7 +314,7 @@ export function MainNavbar() {
   }, []);
 
   return (
-    <Navbar className=" max-w-screen-3xl px-4 py-2 fixed top-0 z-20">
+    <Navbar className=" max-w-screen-3xl px-4 py-2 fixed top-0 z-20 rounded-none">
       <div className="flex items-center justify-between text-blue-gray-900">
         <NavLink to={'/home'}>
           <Typography
