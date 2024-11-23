@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useNavigate, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthContext";
-import { useNavigate, Link, NavLink } from "react-router-dom";
 import {
   Navbar,
   Collapse,
@@ -14,117 +14,22 @@ import {
   IconButton,
   Button,
 } from "@material-tailwind/react";
-import img from '../assets/images/logo-2.png';
-import {
-  UserIcon,
-  ChevronDownIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { ToastContainer } from "react-toastify";
+import { UserIcon, ChevronDownIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import "react-toastify/dist/ReactToastify.css";
+import img from "../assets/images/logo-2.png";
+import { notify } from "./ToastMessage/message";
 
-const nestedMenuItems = [
-  { title: "Hero" },
-  { title: "Features" },
-  { title: "Testimonials" },
-  { title: "Ecommerce" },
+const menuItems = [
+  { title: "Patient", navLink: "/pl" },
+  { title: "Appointment", navLink: "/p_list" },
+  { title: "Diagnosis" },
+  { title: "Blood Bank" },
+  { title: "Insurance" },
+  { title: "Billing" },
+  { title: "Doctors", navLink: "/doctor" },
+  { title: "Reports" },
 ];
-
-const menuItem = [
-  { title: 'Patient', navLink: 'pl' },
-  { title: 'Appointment', navLink: 'p_list' },
-  { title: 'Diagnosis' },
-  { title: 'Blood Bank' },
-  { title: 'Insurance' },
-  { title: 'Billing' },
-  { title: 'Doctors' },
-  { title: 'Reports' }
-];
-
-function NavListMenu() {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [openNestedMenu, setOpenNestedMenu] = React.useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-
-  const renderItems = nestedMenuItems.map(({ title }, key) => (
-    <a href="#" key={key}>
-      <MenuItem>{title}</MenuItem>
-    </a>
-  ));
-
-  return (
-    <>
-      <Menu open={isMenuOpen} handler={setIsMenuOpen} placement="bottom" allowHover>
-        <MenuHandler>
-          <Typography as="div" variant="small" className="font-medium">
-            <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
-              selected={isMenuOpen || isMobileMenuOpen}
-              onClick={() => setIsMobileMenuOpen((cur) => !cur)}
-            >
-              Blocks
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""}`}
-              />
-              <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""}`}
-              />
-            </ListItem>
-          </Typography>
-        </MenuHandler>
-        <MenuList className="hidden rounded-xl lg:block">
-          <Menu
-            placement="right-start"
-            allowHover
-            offset={15}
-            open={openNestedMenu}
-            handler={setOpenNestedMenu}
-          >
-            <MenuHandler className="flex items-center justify-between">
-              <MenuItem>
-                Figma
-                <ChevronDownIcon
-                  strokeWidth={2.5}
-                  className={`h-3.5 w-3.5 transition-transform ${openNestedMenu ? "rotate-90" : ""}`}
-                />
-              </MenuItem>
-            </MenuHandler>
-            <MenuList className="rounded-xl">{renderItems}</MenuList>
-          </Menu>
-          <MenuItem>React</MenuItem>
-          <MenuItem>TailwindCSS</MenuItem>
-        </MenuList>
-      </Menu>
-      <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>
-          <Menu
-            placement="bottom"
-            allowHover
-            offset={6}
-            open={openNestedMenu}
-            handler={setOpenNestedMenu}
-          >
-            <MenuHandler className="flex items-center justify-between">
-              <MenuItem>
-                Figma
-                <ChevronDownIcon
-                  strokeWidth={2.5}
-                  className={`h-3.5 w-3.5 transition-transform ${openNestedMenu ? "rotate-90" : ""}`}
-                />
-              </MenuItem>
-            </MenuHandler>
-            <MenuList className="block rounded-xl lg:hidden">
-              {renderItems}
-            </MenuList>
-          </Menu>
-          <MenuItem>React</MenuItem>
-          <MenuItem>TailwindCSS</MenuItem>
-        </Collapse>
-      </div>
-    </>
-  );
-}
 
 function NavList() {
   const { user, logout } = useContext(AuthContext);
@@ -132,30 +37,57 @@ function NavList() {
 
   const handleLogout = () => {
     logout();
+    notify("You have been logged out successfully!", "success");
     navigate("/home");
+  };
+
+  const handleNavLinkClick = (e, navLink) => {
+    if (!user && navLink) {
+      e.preventDefault();
+      notify("Please login to access this page.", "error");
+    }
   };
 
   return (
     <List className="mb-6 mt-4 p-0 lg:mb-0 lg:mt-0 lg:flex-row lg:p-1">
-      {menuItem.map((item, index) => (
-        <NavLink to={item.navLink} key={index}>
-          <Typography as="a" href="#" variant="small" color="blue-gray" className="font-medium">
+      {menuItems.map((item, index) =>
+        item.navLink ? (
+          <NavLink
+            key={index}
+            to={item.navLink}
+            onClick={(e) => handleNavLinkClick(e, item.navLink)}
+            className={({ isActive }) =>
+              isActive ? "text-blue-500 font-medium" : "text-gray-700 font-medium"
+            }
+          >
+            <Typography as="a" variant="small" className="font-medium">
+              <ListItem className="flex items-center gap-2 py-2 pr-4">{item.title}</ListItem>
+            </Typography>
+          </NavLink>
+        ) : (
+          <Typography
+            key={index}
+            as="span"
+            variant="small"
+            color="gray"
+            className="font-medium cursor-not-allowed"
+          >
             <ListItem className="flex items-center gap-2 py-2 pr-4">{item.title}</ListItem>
           </Typography>
-        </NavLink>
-      ))}
-      <NavListMenu />
-      {/* Conditional rendering for login/profile button */}
+        )
+      )}
       {!user ? (
-        <Button className="bg-grey text-grey-600">
-          <Link to="/login">Login</Link>
-        </Button>
+        <NavLink to="/login">
+          <Button size="sm" variant="outlined" color="blue">
+            Login
+          </Button>
+        </NavLink>
       ) : (
         <Menu placement="bottom-end" allowHover>
           <MenuHandler>
             <ListItem className="flex items-center gap-2 py-1 pr-2 w-30">
               {user.profileImage ? (
-                <img src={user.profileImage} alt="Profile" className="h-6 w-6 rounded-full" />
+                <img src={user.profileImage} alt="User profile picture" className="h-6 w-6 rounded-full" />
               ) : (
                 <UserIcon className="h-6 w-6 text-gray-600" />
               )}
@@ -164,7 +96,9 @@ function NavList() {
           </MenuHandler>
           <MenuList className="rounded-xl">
             <MenuItem>
-              <button onClick={handleLogout}>Logout</button>
+              <button onClick={handleLogout} className="text-red-500 w-full text-left">
+                Logout
+              </button>
             </MenuItem>
           </MenuList>
         </Menu>
@@ -174,9 +108,9 @@ function NavList() {
 }
 
 export function MainNavbar() {
-  const [openNav, setOpenNav] = React.useState(false);
+  const [openNav, setOpenNav] = useState(false);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleResize = () => window.innerWidth >= 960 && setOpenNav(false);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -185,19 +119,29 @@ export function MainNavbar() {
   return (
     <Navbar className="max-w-full mx-auto rounded-none shadow-none fixed z-20 top-0 p-0">
       <div className="flex items-center justify-between text-blue-gray-900">
-        <Typography as="a" href="/home" variant="h6" className="mr-4 text-2xl cursor-pointer py-1.5 lg:ml-2">
-          <img src={img} className="h-14" alt="Loading..." />
+        <Typography
+          as="a"
+          href="/home"
+          variant="h6"
+          className="mr-4 text-2xl cursor-pointer py-1.5 lg:ml-2"
+        >
+          <img src={img} className="h-14" alt="Logo" />
         </Typography>
         <div className="hidden lg:block">
           <NavList />
         </div>
         <IconButton variant="text" className="lg:hidden" onClick={() => setOpenNav(!openNav)}>
-          {openNav ? <XMarkIcon className="h-6 w-6" strokeWidth={2} /> : <Bars3Icon className="h-6 w-6" strokeWidth={2} />}
+          {openNav ? (
+            <XMarkIcon className="h-6 w-6" strokeWidth={2} />
+          ) : (
+            <Bars3Icon className="h-6 w-6" strokeWidth={2} />
+          )}
         </IconButton>
       </div>
       <Collapse open={openNav}>
         <NavList />
       </Collapse>
+      <ToastContainer />
     </Navbar>
   );
 }

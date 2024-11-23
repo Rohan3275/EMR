@@ -19,8 +19,9 @@ const SignUp = () => {
     address: "",
     city: "",
     state: "",
+    profileImage: null, // Added for profile image
+    countryCode: "+91", // Default country code
     agreeToTerms: false,
-    countryCode: "+91", // Added country code
   });
 
   // Error state
@@ -29,10 +30,10 @@ const SignUp = () => {
 
   // Handle input changes
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
+    const { name, value, type, checked, files } = e.target;
     setFormData((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? checked : value,
+      [name]: type === "file" ? files[0] : type === "checkbox" ? checked : value,
     }));
   };
 
@@ -54,16 +55,63 @@ const SignUp = () => {
     if (!formData.state) newErrors.state = "State is required";
     if (!formData.agreeToTerms) newErrors.agreeToTerms = "You must agree to the terms and conditions";
 
+    // Profile Image validation
+    if (formData.profileImage) {
+      const file = formData.profileImage;
+      if (file.size > 5000000) {
+        newErrors.profileImage = "File size must be less than 5MB";
+      } else if (!file.type.startsWith("image/")) {
+        newErrors.profileImage = "Only image files are allowed";
+      }
+    }
+
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
       setLoading(true);
       try {
-        // Use the email, password, and other details in signUp method
-        await signUp(formData.email, formData.password, formData.firstName);
-        localStorage.setItem("signUpData", JSON.stringify(formData)); // Store formData
-        setLoading(false);
-        navigate("/home");
+        // Convert profile image to base64 if it exists
+        let profileImageBase64 = null;
+        if (formData.profileImage) {
+          const reader = new FileReader();
+          reader.onloadend = async () => {
+            profileImageBase64 = reader.result;
+            await signUp({
+              email: formData.email,
+              password: formData.password,
+              firstName: formData.firstName,
+              lastName: formData.lastName,
+              gender: formData.gender,
+              mobile: formData.mobile,
+              dob: formData.dob,
+              disease: formData.disease,
+              address: formData.address,
+              city: formData.city,
+              state: formData.state,
+              profileImage: profileImageBase64, // Send the image
+            });
+            setLoading(false);
+            navigate("/home");
+          };
+          reader.readAsDataURL(formData.profileImage);
+        } else {
+          // Call signUp without image if not provided
+          await signUp({
+            email: formData.email,
+            password: formData.password,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            gender: formData.gender,
+            mobile: formData.mobile,
+            dob: formData.dob,
+            disease: formData.disease,
+            address: formData.address,
+            city: formData.city,
+            state: formData.state,
+          });
+          setLoading(false);
+          navigate("/home");
+        }
       } catch (error) {
         setLoading(false);
         alert("Error in sign-up: " + error.message);
@@ -72,12 +120,11 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100 mt-28 ">
+    <div className="min-h-screen flex justify-center items-center bg-gray-100 mt-20">
       <div className="bg-white border border-blue-600 rounded-lg shadow-xl w-full max-w-lg p-8">
         <h2 className="text-2xl font-semibold text-center text-blue-600 mb-6">Sign Up Now</h2>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          
           {/* First Name */}
           <div>
             <label className="block text-sm font-medium text-gray-700">First Name</label>
@@ -158,7 +205,7 @@ const SignUp = () => {
               {/* Country Code Dropdown */}
               <select
                 name="countryCode"
-                value={formData.countryCode}
+                value={formData.countryCode || "+91"} // default to +91 if countryCode is not set
                 onChange={handleChange}
                 className="w-16 border border-gray-300 rounded-l-md p-2 bg-gray-100"
               >
@@ -198,26 +245,13 @@ const SignUp = () => {
             {errors.dob && <p className="text-red-500 text-xs mt-1">{errors.dob}</p>}
           </div>
 
-          {/* Disease Name */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Disease Name</label>
-            <input
-              name="disease"
-              type="text"
-              placeholder="Disease name"
-              value={formData.disease}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2"
-            />
-            {errors.disease && <p className="text-red-500 text-xs mt-1">{errors.disease}</p>}
-          </div>
+          
 
           {/* Address */}
-          <div className="col-span-1 md:col-span-2">
+          <div>
             <label className="block text-sm font-medium text-gray-700">Address</label>
-            <input
+            <textarea
               name="address"
-              type="text"
               placeholder="Enter your address"
               value={formData.address}
               onChange={handleChange}
@@ -232,7 +266,7 @@ const SignUp = () => {
             <input
               name="city"
               type="text"
-              placeholder="City"
+              placeholder="Enter your city"
               value={formData.city}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md p-2"
@@ -246,7 +280,7 @@ const SignUp = () => {
             <input
               name="state"
               type="text"
-              placeholder="State"
+              placeholder="Enter your state"
               value={formData.state}
               onChange={handleChange}
               className="w-full border border-gray-300 rounded-md p-2"
@@ -254,40 +288,47 @@ const SignUp = () => {
             {errors.state && <p className="text-red-500 text-xs mt-1">{errors.state}</p>}
           </div>
 
-          {/* Terms Checkbox */}
-          <div className="col-span-1 md:col-span-2">
-            <label className="flex items-center">
+         
+
+
+          {/* Terms and Conditions */}
+          <div className="col-span-2">
+            <label className="inline-flex items-center">
               <input
-                name="agreeToTerms"
                 type="checkbox"
+                name="agreeToTerms"
                 checked={formData.agreeToTerms}
                 onChange={handleChange}
-                className="mr-2"
+                className="form-checkbox"
               />
-              I agree to the <Link to="/terms" className="text-blue-500 hover:underline">Terms and Conditions</Link>
+              <span className="ml-2 text-sm">I agree to the Terms and Conditions</span>
             </label>
             {errors.agreeToTerms && <p className="text-red-500 text-xs mt-1">{errors.agreeToTerms}</p>}
           </div>
 
           {/* Submit Button */}
-          <div className="col-span-1 md:col-span-2">
+          <div className="col-span-2 text-center">
             <button
               type="submit"
-              className={`w-full bg-blue-500 text-white p-2 rounded-lg font-semibold text-lg hover:bg-blue-600 transition ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={loading}
+              className="w-full bg-blue-600 text-white py-2 rounded-md disabled:bg-gray-300"
             >
-              {loading ? 'Signing Up...' : 'Sign Up'}
+              {loading ? "Signing Up..." : "Sign Up"}
             </button>
           </div>
-
         </form>
 
-        <p className="text-center mt-4">
-          Already have an account? <Link to="/login" className="text-blue-500 hover:underline">Log in here</Link>.
-        </p>
+        {/* Already have an account */}
+        <div className="mt-4 text-center">
+          <p className="text-sm">
+            Already have an account?{" "}
+            <Link to="/login" className="text-blue-600">Login</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
 export default SignUp;
+

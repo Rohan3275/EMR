@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { addPatientAsynk } from './patientListSlice';
 import { Select, Option } from '@material-tailwind/react';
-
+import { notify } from "../ToastMessage/message";
 const Registration = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const [imagePreview, setImagePreview] = useState(null);
@@ -41,12 +41,13 @@ const Registration = () => {
         p_limit: '',
         profile: '',
         reason: '',
-        appoitment:'No',
         type: '',
         time: '',
         date: '',
         doctor: '',
-        notes: ''
+        notes: '',
+        appoitment:'No'
+
     })
 
 
@@ -55,7 +56,8 @@ const Registration = () => {
         console.log(values)
 
         dispatch(addPatientAsynk(values))
-        alert("Patient added successfully..")
+        notify("Patient added successfully ","success")
+        navigate('/pl')
         // data.imagePreview = imagePreview; // Attach the image preview to the data
         // navigate('/patient-card', { state: data }); // Navigate to the review page with the form data
 
@@ -85,10 +87,10 @@ const Registration = () => {
 
 
     return (
-        <div className="w-[80%]  mx-auto md:pt-5 p-5 md:border border-gray-200 rounded-lg mt-[110px] overflow-auto max-h-[700px] my-5">
+        <div className="max-w-5xl mx-auto md:pt-5 p-5 md:border border-gray-600 rounded-lg mt-20 my-5">
             <form onSubmit={onSubmit} >
                 <div className='flex items-center justify-center'>
-                    <h1 className="text-3xl font-bold mb-6">Patient Registration</h1>   
+                    <h1 className="text-3xl font-bold mb-6">Patient Registration</h1>
                 </div>
 
 
