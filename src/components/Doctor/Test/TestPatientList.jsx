@@ -22,10 +22,9 @@ export function TestPatientList() {
   const [filteredPatients, setFilteredPatients] = useState(testpatient);
   useEffect(() => {
     const results = testpatient.filter(item =>
-      item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.id.toLowerCase().includes(searchTerm.toLowerCase())
-
-
-    );
+      (item.name?.toLowerCase() ?? "").includes(searchTerm.toLowerCase()) ||
+      (item.id?.toLowerCase() ?? "").includes(searchTerm.toLowerCase())
+  );
     setFilteredPatients(results);
   }, [searchTerm, testpatient])
 

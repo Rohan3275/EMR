@@ -24,7 +24,7 @@ import img from '../assets/images/logo-2.png';
 import { notify } from "./ToastMessage/message";
 import { useNavigate, Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../AuthContext";
-
+import BloodDropDown from "./Blood_Donor/BloodDropDown";
 const nestedMenuItems = [
   { title: "Hero" },
   { title: "Features" },
@@ -41,8 +41,13 @@ const handleNavLinkClick = (e, navLink) => {
 };
 function NavListMenu() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [openNestedMenu, setopenNestedMenu] = useState(false);
+  // const [openNestedMenu, setopenNestedMenu] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  // Blood Bank Navbar
+  const [isBloodMenuOpen, setIsBloodMenuOpen] = useState(false);
+  const [isBloodMobileMenuOpen, setBloodIsMobileMenuOpen] = useState(false);
+
 
   const renderItems = nestedMenuItems.map(({ title }, key) => (
     <a href="#" key={key}>
@@ -81,8 +86,44 @@ function NavListMenu() {
           <NavLink to={"/tpList"} onClick={(e) => handleNavLinkClick(e, "/tpList")}>
             <MenuItem>Test</MenuItem>
           </NavLink>
-          <NavLink to={"/managecategories"} onClick={(e) => handleNavLinkClick(e, "/managecategories")}>
+          <NavLink to={"/categories"} onClick={(e) => handleNavLinkClick(e, "/categories")}>
             <MenuItem>Category</MenuItem>
+          </NavLink>
+        </MenuList>
+      </Menu>
+
+
+      <Menu
+        open={isBloodMenuOpen}
+        handler={setIsBloodMenuOpen}
+        placement="bottom"
+        allowHover={true}
+      >
+        <MenuHandler>
+          <Typography as="div" variant="small" className="font-medium">
+            <ListItem
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              selected={isBloodMenuOpen || isBloodMobileMenuOpen}
+              onClick={() => setBloodIsMobileMenuOpen((cur) => !cur)}
+            >
+              Blood Bank
+              <ChevronDownIcon
+                strokeWidth={2.5}
+                className={`hidden h-3 w-3 transition-transform lg:block ${isBloodMenuOpen ? "rotate-180" : ""}`}
+              />
+              <ChevronDownIcon
+                strokeWidth={2.5}
+                className={`block h-3 w-3 transition-transform lg:hidden ${isBloodMobileMenuOpen ? "rotate-180" : ""}`}
+              />
+            </ListItem>
+          </Typography>
+        </MenuHandler>
+        <MenuList className="hidden rounded-xl lg:block">
+          <NavLink to={"/d_list"} onClick={(e) => handleNavLinkClick(e, "/b_donor")}>
+            <MenuItem>Blood Register</MenuItem>
+          </NavLink>
+          <NavLink to={"/b_req"} onClick={(e) => handleNavLinkClick(e, "/b_req")}>
+            <MenuItem>Blood Request</MenuItem>
           </NavLink>
         </MenuList>
       </Menu>
@@ -154,13 +195,17 @@ function NavList() {
       <Typography as="a" variant="small" color="blue-gray" className="font-medium">
         <ListItem className="flex items-center gap-2 py-2 pr-4">Diagnosis</ListItem>
       </Typography>
-
-      <Typography as="a" variant="small" color="blue-gray" className="font-medium">
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Blood Bank</ListItem>
-      </Typography>
-    
-      <Typography as="a" variant="small" color="blue-gray" className="font-medium">
-        <ListItem className="flex items-center gap-2 py-2 pr-4">Insurance</ListItem>
+      {/* <BloodDropDown/> */}
+      <Typography
+        as="a"
+        href="#"
+        variant="small"
+        color="blue-gray"
+        className="font-medium"
+      >
+        <ListItem className="flex items-center gap-2 py-2 pr-4">
+          Insurance
+        </ListItem>
       </Typography>
 
       <Typography as="a" variant="small" color="blue-gray" className="font-medium">

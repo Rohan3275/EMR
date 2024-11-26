@@ -33,11 +33,12 @@ export function PatientListd() {
     const [filteredPatients, setFilteredPatients] = useState(patient);
     useEffect(() => {
         const results = patient.filter(item =>
-            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchTerm.toLowerCase())
+            (item.name?.toLowerCase() ?? "").includes(searchTerm.toLowerCase()) ||
+            (item.email?.toLowerCase() ?? "").includes(searchTerm.toLowerCase())
         );
         setFilteredPatients(results);
-    }, [searchTerm, patient])
+    }, [searchTerm, patient]);
+    
 
     // 
 

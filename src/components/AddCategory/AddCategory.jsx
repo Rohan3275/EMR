@@ -15,7 +15,7 @@ const AddCategory = () => {
       .post("http://localhost:3000/categories", { category, shortName })
       .then(() => {
         // Redirect to the manage categories page after adding
-        navigate("/managecategories");
+        navigate("/categories");
       })
       .catch((error) => {
         console.error("There was an error adding the category!", error);

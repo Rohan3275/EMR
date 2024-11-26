@@ -24,7 +24,7 @@ const ManageCategories = () => {
 
   // Navigate to AddCategory page
   const handleAddCategory = () => {
-    navigate("/add-category");
+    navigate("/addcategory");
   };
 
   // Delete category by id

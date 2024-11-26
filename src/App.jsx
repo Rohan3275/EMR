@@ -19,8 +19,11 @@ import PrivateRoute from "./components/Login/PrivateRoute";
 import { TestPatientList } from "./components/Doctor/Test/TestPatientList";
 import { PatientTest } from './components/Doctor/Test/TestSubPages/patientTest';
 import { LabList } from './components/Lab/LabList';
-import ManageCategories from "./components/AddCategory/ManageCategories";
-import AddCategory from "./components/AddCategory/AddCategory";
+import { Blood_DonorList } from './components/Blood_Donor/BloodDonorList';
+import BloodRegister from './components/Blood_Donor/BloodRegister';
+import BloodRequestForm from './components/Blood_Donor/BloodForm';
+import ManageCategories from './components/AddCategory/ManageCategories';
+import AddCategory from './components/AddCategory/AddCategory';
 function App() {
 
   return (
@@ -35,12 +38,16 @@ function App() {
           <Route path='/pl' element={<PatientListd />} />
           <Route path='/pr' element={<Registration />} />
           <Route path='/p_list' element={<PatientList />} />
+          <Route path='/d_list' element={<Blood_DonorList/>} />
+          <Route path='/b_donor' element={<BloodRegister/>} />
+          <Route path='/b_req' element={<BloodRequestForm/>} />
           <Route path='/lab' element={<LabList />} />
+          <Route path='/categories' element={<ManageCategories />} />
+          <Route path='/addcategory' element={<AddCategory />} />
+
           <Route path="/tpList" element={<TestPatientList/>} />
           <Route path="/tpList/ptest" element={<PatientTest />} />
-          <Route path="/doctor" element={<DoctorList />} />
-          <Route path="/managecategories" element={<ManageCategories />} />
-          <Route path="/add-category" element={<AddCategory />} />
+          <Route path="/doctor" element={<DoctorList />} />        
           <Route path="/doctor/adddoctor" element={<AddDoctors />} />
          
           <Route

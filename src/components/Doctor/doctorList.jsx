@@ -89,7 +89,7 @@ export function DoctorList() {
                                             color="blue-gray"
                                             className="font-normal"
                                         >
-                                            <img src={item.profile} className="h-10 rounded-full" alt="" />
+                                            <img src={item.profile} className="max-h-14 max-w-24 rounded-full" alt="" />
                                         </Typography>
                                     </td>
                                     <td className={classes}>
