@@ -12,7 +12,7 @@ const ManageCategories = () => {
   // Fetch categories from db.json
   useEffect(() => {
     axios
-      .get("http://localhost:5000/categories")
+      .get("http://localhost:3000/categories")
       .then((response) => {
         setCategories(response.data);
         setFilteredCategories(response.data);
@@ -30,7 +30,7 @@ const ManageCategories = () => {
   // Delete category by id
   const handleDeleteCategory = (id) => {
     axios
-      .delete(`http://localhost:5000/categories/${id}`)
+      .delete(`http://localhost:3000/categories/${id}`)
       .then(() => {
         const updatedCategories = categories.filter(
           (category) => category.id !== id

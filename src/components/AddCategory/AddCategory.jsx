@@ -12,7 +12,7 @@ const AddCategory = () => {
 
     // Add the new category to the server
     axios
-      .post("http://localhost:5000/categories", { category, shortName })
+      .post("http://localhost:3000/categories", { category, shortName })
       .then(() => {
         // Redirect to the manage categories page after adding
         navigate("/managecategories");

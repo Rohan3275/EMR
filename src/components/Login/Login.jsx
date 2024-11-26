@@ -44,7 +44,9 @@ const Login = () => {
       const success = await login(email, password, rememberMe); // You can handle the rememberMe logic in your backend
       if (success) {
         notify("Login successful");
+       
         navigate("/home");
+         location.reload()
       } else {
         setError({ credentials: "Invalid email or password" });
       }

@@ -5,6 +5,8 @@ import { deleteAsynk, getListAsynk } from "./patientListSlice";
 import { ViewDialog } from "./Dialogs/view";
 import { Appointment } from "./Dialogs/appointment";
 import { NavLink } from "react-router-dom";
+import Dashboard from "../Dashboard/dashboard";
+
 
 
 export function PatientListd() {
@@ -42,7 +44,7 @@ export function PatientListd() {
     return (<>
 
         <div className="mt-24 p-4">
-
+            <Dashboard count={patient.length} />
             <div className="relative mb-5 flex justify-between  me-5">
                 <input
                     type="text"
