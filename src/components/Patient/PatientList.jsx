@@ -40,9 +40,9 @@ export function PatientListd() {
 
     // 
 
-    return (
-        <>
-        <div className="mt-32 p-4">
+    return (<>
+
+        <div className="mt-24 p-4">
 
             <div className="relative mb-5 flex justify-between  me-5">
                 <input
@@ -109,7 +109,7 @@ export function PatientListd() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="font-bold"
                                         >
                                             {item.name}
                                         </Typography>
@@ -118,7 +118,7 @@ export function PatientListd() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className=""
                                         >
                                             {item.gender}
                                         </Typography>
@@ -127,7 +127,7 @@ export function PatientListd() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="text-purple-400"
                                         >
                                             {item.email}
                                         </Typography>

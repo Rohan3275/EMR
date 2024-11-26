@@ -14,16 +14,14 @@ const BloodRegister = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [values, setValues] = useState({
-    first_name: "",
-    last_name: "",
-    blood_group: "",
+    fname: "",
+    lname: "",
+    bloodGroup: "",
     age: "",
-    id_number: "",
     email: "",
     address: "",
     city: "",
     state: "",
-    country: "",
     pin_code: "",
     contact: "",
   });
@@ -33,8 +31,8 @@ const BloodRegister = () => {
     console.log(values);
 
     dispatch(addPatientAsynk(values));
-    notify("Patient added successfully ", "success");
-    navigate("/b_list");
+    notify("Blood_Donor added successfully ", "success");
+    navigate("/d_list");
     // data.imagePreview = imagePreview; // Attach the image preview to the data
     // navigate('/patient-card', { state: data }); // Navigate to the review page with the form data
 
@@ -80,7 +78,7 @@ const BloodRegister = () => {
             <Select
               {...register("bloodGroup")}
               className="mt-1 block w-full rounded-md p-2"
-              onChange={(value) => setValues({ ...values, donorSlice: value })}
+              onChange={(value) => setValues({ ...values, bloodGroup: value })}
             >
               <Option value="">Select</Option>
               <Option value="A+">A+</Option>

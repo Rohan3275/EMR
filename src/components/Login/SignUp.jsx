@@ -109,8 +109,8 @@ const SignUp = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100 mt-28">
-      <div className="bg-white border border-blue-600 rounded-lg shadow-xl w-full max-w-lg p-8">
+    <div className="min-h-screen flex justify-center items-center mt-28 mb-28">
+      <div className="bg-white border border-blue-600 rounded-lg shadow-xl w-full max-w-3xl p-8">
         <h2 className="text-2xl font-semibold text-center text-blue-600 mb-6">Sign Up Now</h2>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">

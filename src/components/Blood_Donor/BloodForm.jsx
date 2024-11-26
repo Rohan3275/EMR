@@ -14,7 +14,7 @@ function BloodRequestForm() {
   };
 
   return (
-    <NavLink to="/Bd" className="flex justify-center items-center h-auto bg-gray-50 pt-20 mb-5 ">
+    <NavLink to="/b_req" className="flex justify-center items-center h-auto bg-gray-50 pt-20 mb-5 ">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl border border-gray-600"

@@ -20,7 +20,7 @@ const Dashboard = () => {
       >
         Logout
       </button>
-      
+
     </div>
   );
 };

@@ -1,50 +1,4 @@
-import { Button, Card, Typography } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { deleteAsynk, getListAsynk } from "./BloodDonorListSlice";
-import { ViewDialog } from "./Dialogs/view";
-import { NavLink } from "react-router-dom";
-
-export function Blood_DonorList() {
-    const TABLE_HEAD = ["Full Name", "Email", "Contact Number", "Blood Group","Actions"];
-    const donor = useSelector((state) => state.donor.donor);
-    const dispatch = useDispatch();
-
-    const [searchTerm, setSearchTerm] = useState("");
-    // const [filteredDonor, setFilteredDonor] = useState([]);
-    // const [zoomedIndex, setZoomedIndex] = useState(null);
-
-    useEffect(() => {
-        dispatch(getListAsynk());
-    }, [dispatch]);
-
-    // useEffect(() => {
-    //     setFilteredDonor(donor);
-    // }, [donor]);
-
-    // useEffect(() => {
-    //     const results = donor.filter((item) =>
-    //         item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    //         item.email.toLowerCase().includes(searchTerm.toLowerCase())
-    //     );
-    //     setFilteredDonor(results);
-    // }, [searchTerm, donor]);
-
-    const filteredDonor = donor.filter((item) =>
-        `${item.fname} ${item.lname}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        item.email.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    
-
-    // useEffect(() => {
-    //     setZoomedIndex(null);
-    // }, [filteredDonor]);
-
-    // const handleClick = (index) => {
-    //     setZoomedIndex(zoomedIndex === index ? null : index);
-    // };
-
-    return (
+return (
         <div className="mt-32 p-4">
             <div className="relative mb-5 flex justify-between me-5">
                 <input
@@ -86,7 +40,7 @@ export function Blood_DonorList() {
                                 <tr key={item.id}>
                                     <td className={classes}>
                                         <Typography variant="small" color="blue-gray">
-                                        {item.fname} {item.lname}
+                                            {item.name}
                                         </Typography>
                                     </td>
                                     <td className={classes}>
@@ -101,7 +55,7 @@ export function Blood_DonorList() {
                                     </td>
                                     <td className={classes}>
                                         <Typography variant="small" color="blue-gray">
-                                            {item.bloodGroup}
+                                            {item.blood_group}
                                         </Typography>
                                     </td>
                                     <td className={classes}>
@@ -110,7 +64,7 @@ export function Blood_DonorList() {
                                                 <ViewDialog {...item} />
                                                 <img
                                                     src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png"
-                                                    className="h-4"
+                                                    className="h-4 cursor-pointer"
                                                     onClick={() => dispatch(deleteAsynk(item.id))}
                                                     alt="delete icon"
                                                 />
@@ -125,4 +79,3 @@ export function Blood_DonorList() {
             </Card>
         </div>
     );
-}

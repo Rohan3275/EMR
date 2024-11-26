@@ -62,10 +62,10 @@ export function AddDoctors() {
     }
     // 
     return (<>
-        <div className="mt-32 p-4 ps-20 pe-20">
+        <div className="mt-24 p-4 ps-20 pe-20">
             <div>
                 <p className="text-3xl font-bold">Add Doctors</p>
-                <form className="mt-10" onSubmit={onSubmit}>
+                <form className="mt-7" onSubmit={onSubmit}>
                     <div className="grid grid-rows-1 grid-cols-2 gap-5">
                         <div>
                             <p className="text-sm">Title</p>
