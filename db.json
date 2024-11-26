@@ -1,6 +1,59 @@
 {
   "users": [
     {
+      "id": "1",
+      "email": "john@example.com",
+      "password": "password123"
+    },
+    {
+      "id": "2",
+      "email": "jane@example.com",
+      "password": "mypassword"
+    },
+    {
+      "id": "3",
+      "email": "alice@example.com",
+      "password": "alicepassword"
+    },
+    {
+      "id": "856c",
+      "email": "nitin@gmail.com",
+      "password": "789654"
+    },
+    {
+      "id": "4d62",
+      "email": "nitin@gmail.com",
+      "password": "789654"
+    },
+    {
+      "id": "8a56",
+      "email": "raj@yahoo.com",
+      "password": "raj123"
+    },
+    {
+      "id": "08dd",
+      "email": "zeeshan@yahoo.com",
+      "password": "zee123"
+    },
+    {
+      "id": "bdf6",
+      "email": "shubham2@gmail.com",
+      "password": "shub123",
+      "firstName": "Shubham"
+    },
+    {
+      "id": "b8fb",
+      "email": "nitinhandalofficial@gmail.com",
+      "password": "789654",
+      "firstName": "Nitin"
+    },
+    {
+      "id": "ede6",
+      "email": "Kunal001@gmail.com",
+      "password": "kunal123",
+      "firstName": "Kunal"
+    },
+    {
       "id": "1176",
       "email": {
         "email": "alfajshaikh55@gmail.com",
@@ -333,6 +386,7 @@
       "reportheading": "Emr Report"
     }
   ],
+<<<<<<< HEAD
   "Donor": [
     {
       "id": "cb59",
@@ -362,6 +416,43 @@
       "state": "",
       "pin_code": "",
       "contact": "945163225"
+=======
+  "categories": [
+    {
+      "id": "2",
+      "category": "Haematology",
+      "shortName": "Hmtlgy"
+    },
+    {
+      "id": "794b",
+      "category": "Biochemistry",
+      "shortName": "biochem"
+    },
+    {
+      "id": "ec1a",
+      "category": "rertyi",
+      "shortName": "weret"
+    },
+    {
+      "id": "3659",
+      "category": "sadfghj",
+      "shortName": "sADFSGRTHYJ"
+    },
+    {
+      "id": "448a",
+      "category": "Adsfgfh",
+      "shortName": "asdfdghfj"
+    },
+    {
+      "id": "bc75",
+      "category": "ZAxscdsfvdgbfhj",
+      "shortName": "Zdsafhj"
+    },
+    {
+      "id": "2b73",
+      "category": "esrdthg",
+      "shortName": "dfjhgkjl"
+>>>>>>> 9be2931abb8087135e0d61aa27d30b3bf45435c9
     }
   ]
 }

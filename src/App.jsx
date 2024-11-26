@@ -19,9 +19,14 @@ import PrivateRoute from "./components/Login/PrivateRoute";
 import { TestPatientList } from "./components/Doctor/Test/TestPatientList";
 import { PatientTest } from './components/Doctor/Test/TestSubPages/patientTest';
 import { LabList } from './components/Lab/LabList';
+<<<<<<< HEAD
 import { Blood_DonorList } from './components/Blood_Donor/BloodDonorList';
 import BloodRegister from './components/Blood_Donor/BloodRegister';
 import BloodRequestForm from './components/Blood_Donor/BloodForm';
+=======
+import ManageCategories from "./components/AddCategory/ManageCategories";
+import AddCategory from "./components/AddCategory/AddCategory";
+>>>>>>> 9be2931abb8087135e0d61aa27d30b3bf45435c9
 function App() {
 
   return (
@@ -42,7 +47,13 @@ function App() {
           <Route path='/lab' element={<LabList />} />
           <Route path="/tpList" element={<TestPatientList/>} />
           <Route path="/tpList/ptest" element={<PatientTest />} />
+<<<<<<< HEAD
           <Route path="/doctor" element={<DoctorList />} />        
+=======
+          <Route path="/doctor" element={<DoctorList />} />
+          <Route path="/managecategories" element={<ManageCategories />} />
+          <Route path="/add-category" element={<AddCategory />} />
+>>>>>>> 9be2931abb8087135e0d61aa27d30b3bf45435c9
           <Route path="/doctor/adddoctor" element={<AddDoctors />} />
          
           <Route
