@@ -5,6 +5,8 @@ import { deleteAsynk, getListAsynk } from "./patientListSlice";
 import { ViewDialog } from "./Dialogs/view";
 import { Appointment } from "./Dialogs/appointment";
 import { NavLink } from "react-router-dom";
+import Dashboard from "../Dashboard/dashboard";
+
 
 
 export function PatientListd() {
@@ -31,18 +33,19 @@ export function PatientListd() {
     const [filteredPatients, setFilteredPatients] = useState(patient);
     useEffect(() => {
         const results = patient.filter(item =>
-            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchTerm.toLowerCase())
+            (item.name?.toLowerCase() ?? "").includes(searchTerm.toLowerCase()) ||
+            (item.email?.toLowerCase() ?? "").includes(searchTerm.toLowerCase())
         );
         setFilteredPatients(results);
-    }, [searchTerm, patient])
+    }, [searchTerm, patient]);
+    
 
     // 
 
     return (<>
 
-        <div className="mt-32 p-4">
-
+        <div className="mt-24 p-4">
+            <Dashboard count={patient.length} />
             <div className="relative mb-5 flex justify-between  me-5">
                 <input
                     type="text"
@@ -108,7 +111,7 @@ export function PatientListd() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="font-bold"
                                         >
                                             {item.name}
                                         </Typography>
@@ -117,7 +120,7 @@ export function PatientListd() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className=""
                                         >
                                             {item.gender}
                                         </Typography>
@@ -126,7 +129,7 @@ export function PatientListd() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="text-purple-400"
                                         >
                                             {item.email}
                                         </Typography>

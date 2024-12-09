@@ -29,8 +29,8 @@ export function PatientList() {
     const [filteredPatients, setFilteredPatients] = useState(patient);
     useEffect(() => {
         const results = patient.filter(item =>
-            item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchTerm.toLowerCase())
+            (item.name?.toLowerCase() ?? "").includes(searchTerm.toLowerCase()) ||
+            (item.email?.toLowerCase() ?? "").includes(searchTerm.toLowerCase())
         );
         setFilteredPatients(results);
     }, [searchTerm, patient])
@@ -39,13 +39,13 @@ export function PatientList() {
 
     return (<>
 
-        <div className="mt-32 p-4">
+        <div className="mt-24 p-4">
             <div className="relative mb-5 ">
                 <input
                     type="text"
                     placeholder="Search by name or email"
                     value={searchTerm}
-                    
+
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="p-2 pl-12 border border-blue-400  rounded-full"
                 />
@@ -91,7 +91,7 @@ export function PatientList() {
                                                 className={`  cursor-pointer  ${zoomedIndex === index ? 'z-10' : ''}`}
                                                 onClick={() => handleClick(index)}>
 
-                                                <img src={item.profile} className={`max-h-10 max-w-20 rounded-full transition-transform overflow-hidden duration-300 ${zoomedIndex === index ? 'scale-[4] ms-20' : 'scale-100'}`} alt="" />
+                                                <img src={item.profile} className={`max-h-14 max-w-24 rounded-full border border-green-600 transition-transform overflow-hidden duration-300 ${zoomedIndex === index ? 'scale-[4] ms-20' : 'scale-100'}`} alt="" />
                                             </div>
 
 
@@ -101,7 +101,7 @@ export function PatientList() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="font-bold"
                                         >
                                             {item.name}
                                         </Typography>
@@ -119,7 +119,7 @@ export function PatientList() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="text-purple-400"
                                         >
                                             {item.email}
                                         </Typography>
@@ -149,7 +149,7 @@ export function PatientList() {
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="text-orange-600"
                                         >
                                             {item.date}
                                         </Typography>

@@ -45,6 +45,7 @@ const Registration = () => {
         time: '',
         date: '',
         doctor: '',
+        test:'',
         notes: '',
         appoitment:'No'
 

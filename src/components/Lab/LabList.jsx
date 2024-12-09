@@ -1,41 +1,35 @@
-import { useSelect } from "@material-tailwind/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteDoctorsAsynk, getdoctorsListAsynk } from "./doctorsSlice";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getLabPatientListAsynk } from "../Lab/labSlice";
+import { useState } from "react";
 import { Button, Card, Typography } from "@material-tailwind/react";
-import { notify } from "../ToastMessage/message";
+import { NavLink } from "react-router-dom";
 
-import 'react-toastify/dist/ReactToastify.css';
+export function LabList() {
+    const TABLE_HEAD = ["Id", "Full Name", "Gender", "Email", "Contact Number", "Appointment Type", "Appointment Date", "Actions", "Test and Prespection"];
+    const labpatient = useSelector(state => state.labpatient.labpatient);
 
-
-export function DoctorList() {
-    const TABLE_HEAD = ["Profile", "Full Name", "Specialist", "Email", "Contact Number", "Gender", "Actions"];
-    const doctors = useSelector(state => state.doctors.doctors)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     useEffect(() => {
-        dispatch(getdoctorsListAsynk())
+       console.log(labpatient); 
+       dispatch(getLabPatientListAsynk())
     }, [dispatch])
 
-    // Search patient 
     const [searchTerm, setSearchTerm] = useState("");
-    const [filteredPatients, setFilteredPatients] = useState(doctors);
-    useEffect(() => {
-        const results = doctors.filter(item =>
-            item.fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.specialist.toLowerCase().includes(searchTerm.toLowerCase())
+    const [filteredPatients, setFilteredPatients] = useState(labpatient);
 
+    useEffect(() => {
+        const results = labpatient.filter(item =>
+            item.name.toLowerCase().includes(searchTerm.toLowerCase()) || item.id.toLowerCase().includes(searchTerm.toLowerCase())
         );
         setFilteredPatients(results);
-    }, [searchTerm, doctors])
-
-    // 
+    }, [searchTerm, labpatient])
     return (<>
-        <div className="mt-24 p-4 ">
-            {/* <Button onClick={() => { notify("") }}>Toast Message</Button> */}
+
+        <div className="mt-32 p-4">
 
             <div className="relative mb-5 flex justify-between  me-5">
                 <input
@@ -49,8 +43,8 @@ export function DoctorList() {
                     <img src="https://cdn-icons-png.freepik.com/512/861/861627.png" className="h-5 w-5" alt="search icon" />
                 </span>
 
-                <NavLink to='adddoctor'>
-                    <Button className="" size="sm" color="red">Add Doctors</Button>
+                <NavLink to='/pr'>
+                    <Button className="" size="sm" color="red">Add Patient</Button>
                 </NavLink>
 
             </div>
@@ -77,28 +71,35 @@ export function DoctorList() {
                     </thead>
                     <tbody>
                         {filteredPatients.map((item, index) => {
-                            const isLast = index === doctors.length - 1;
+                            const isLast = index === labpatient.length - 1;
                             const classes = isLast ? "p-4" : "p-4 border-b border-blue-gray-50";
 
                             return (
                                 <tr key={name}>
-                                   
-                                    <td className={classes}>
+                                    {/* <td className={classes}>
+                            <Typography
+                                variant="small"
+                                color="blue-gray"
+                                className="font-normal"
+                            >
+                                <div key={index}
+                                    className={`  cursor-pointer  ${zoomedIndex === index ? 'z-10' : ''}`}
+                                    onClick={() => handleClick(index)}>
+
+                                    <img src={item.profile} className={`max-h-10 rounded-full transition-transform duration-300 ${zoomedIndex === index ? 'scale-[4] ms-20' : 'scale-100'}`} alt="" />
+                                </div>
+
+
+                            </Typography>
+                        </td> */}
+
+<td className={classes}>
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="font-bold"
                                         >
-                                            <img src={item.profile} className="max-h-14 max-w-24 rounded-full" alt="" />
-                                        </Typography>
-                                    </td>
-                                    <td className={classes}>
-                                        <Typography
-                                            variant="small"
-                                            color="blue-gray"
-                                            className="font-normal"
-                                        >
-                                            <span className="font-bold">{item.title}. </span>{item.fname + " " + item.mname + " " + item.lname}
+                                            {item.id}
                                         </Typography>
                                     </td>
                                     <td className={classes}>
@@ -107,15 +108,23 @@ export function DoctorList() {
                                             color="blue-gray"
                                             className="font-bold"
                                         >
-                                            {item.specialist}
+                                            {item.name}
                                         </Typography>
                                     </td>
-
+                                    {/* <td className={classes}>
+                                        <Typography
+                                            variant="small"
+                                            color="blue-gray"
+                                            className=""
+                                        >
+                                            {item.gender}
+                                        </Typography>
+                                    </td>
                                     <td className={classes}>
                                         <Typography
                                             variant="small"
                                             color="blue-gray"
-                                            className="font-normal"
+                                            className="text-purple-400"
                                         >
                                             {item.email}
                                         </Typography>
@@ -137,7 +146,17 @@ export function DoctorList() {
                                             color="blue-gray"
                                             className="font-normal"
                                         >
-                                            {item.gender}
+                                            {item.type}
+                                        </Typography>
+                                    </td>
+
+                                    <td className={classes}>
+                                        <Typography
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="font-normal"
+                                        >
+                                            {item.date}
                                         </Typography>
                                     </td>
                                     <td className={classes}>
@@ -149,13 +168,23 @@ export function DoctorList() {
                                             className="font-medium"
                                         >
                                             <div className="flex gap-2">
-                                                {/* <ViewDialog id={item.id} profile={item.profile} DOB={item.DOB} age={item.age} gender={item.gender} contact={item.contact} name={item.name} address={item.address} blood_group={item.blood_group} email={item.email} appoitment={item.appoitment} /> */}
-                                                <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" className="h-4" onClick={() => dispatch(deleteDoctorsAsynk(item.id))} alt="" /><img src="" alt="" className="h-5" />
+                                                <ViewDialog id={item.id} profile={item.profile} DOB={item.DOB} age={item.age} gender={item.gender} contact={item.contact} name={item.name} address={item.address} blood_group={item.blood_group} email={item.email} appoitment={item.appoitment} />
+                                                <img src="https://cdn-icons-png.flaticon.com/512/6861/6861362.png" className="h-4" onClick={() => dispatch(deleteAsynk(item.id))} alt="" /><img src="" alt="" className="h-5" />
                                             </div>
                                         </Typography>
                                     </td>
 
-
+                                    <td className={classes}>
+                                        <Typography
+                                            as="a"
+                                            href="#"
+                                            variant="small"
+                                            color="blue-gray"
+                                            className="text-green-800 font-bold"
+                                        >
+                                            {item.appoitment}
+                                        </Typography>
+                                    </td> */}
                                 </tr>
                             );
                         })}
